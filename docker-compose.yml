@@ -1,5 +1,4 @@
-version: '2'
-
+version: '2' 
 services:
   stats:
     image: bitnami/rabbitmq
@@ -10,6 +9,7 @@ services:
       - RABBITMQ_NODE_NAME=rabbit@stats 
       - RABBITMQ_ERL_COOKIE=sricats1231R
     ports:
+      - '5672:5672'
       - '15672:15672'
     volumes:
       - 'rabbitmqstats_data:/bitnami'
