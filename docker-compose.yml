@@ -1,0 +1,82 @@
+version: "3"
+services:
+  sricatsrabbitmqmasternode:
+    image: rabbitmq:3-management
+    hostname: sricatsrabbitmqmasternode
+    container_name: sricatsrabbitmqmasternode
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin}
+      - RABBITMQ_ERLANG_COOKIE=aslfjas@asdf
+      - RABBITMQ_DEFAULT_VHOST=sricatsrabbitmqmasternode
+    volumes:  
+      - "$PWD/sricatsrabbitmqmasternode/mnesia:/var/lib/sricatsrabbitmqmasternode" 
+      - "$PWD/sricatsrabbitmqmasternode/rabbit_enabled_plugins:/etc/sricatsrabbitmqmasternode/enabled_plugins"
+
+  sricatsrabbitmqslave1:
+    image: rabbitmq:3-management
+    hostname: sricatsrabbitmqslave1
+    container_name: sricatsrabbitmqslave1
+    links:
+      - sricatsrabbitmqmasternode
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin}
+      - CLUSTERED=true
+      - CLUSTER_WITH=sricatsrabbitmqmasternode
+      - RAM_NODE=true
+      - RABBITMQ_ERLANG_COOKIE=aslfjas@asdf
+      - RABBITMQ_DEFAULT_VHOST=sricatsrabbitmqmasternode
+    ports:
+      - "6672:5672"
+      - "16672:15672"
+    volumes:
+      - "$PWD/sricatsrabbitmqslave1/mnesia:/var/lib/sricatsrabbitmqslave1"  
+      - "$PWD/sricatsrabbitmqslave1/rabbit_enabled_plugins:/etc/sricatsrabbitmqslave1/enabled_plugins"
+
+  sricatsrabbitmqslave2:
+    image: rabbitmq:3-management
+    hostname: sricatsrabbitmqslave2
+    container_name: sricatsrabbitmqslave2
+    links:
+      - sricatsrabbitmqmasternode
+      - sricatsrabbitmqslave1
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin}
+      - CLUSTERED=true
+      - RAM_NODE=true
+      - CLUSTER_WITH=sricatsrabbitmqmasternode
+      - RABBITMQ_ERLANG_COOKIE=aslfjas@asdf
+      - RABBITMQ_DEFAULT_VHOST=sricatsrabbitmqmasternode
+    ports:
+      - "7673:5672" 
+      - "17672:15672"
+    volumes:
+      - "$PWD/sricatsrabbitmqslave2/mnesia:/var/lib/sricatsrabbitmqslave2"  
+      - "$PWD/sricatsrabbitmqslave2/rabbit_enabled_plugins:/etc/sricatsrabbitmqslave2/enabled_plugins"
+
+  sricatsrabbitmqslave3:
+    image: rabbitmq:3-management
+    hostname: sricatsrabbitmqslave3
+    container_name: sricatsrabbitmqslave3
+    links:
+      - sricatsrabbitmqmasternode
+      - sricatsrabbitmqslave1
+      - sricatsrabbitmqslave2
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin}
+      - CLUSTERED=true
+      - CLUSTER_WITH=sricatsrabbitmqmasternode
+      - RABBITMQ_ERLANG_COOKIE=aslfjas@asdf
+      - RABBITMQ_DEFAULT_VHOST=sricatsrabbitmqmasternode
+    ports:
+      - "8674:5672" 
+      - "18672:15672" 
+    volumes:
+      - "$PWD/sricatsrabbitmqslave3/mnesia:/var/lib/sricatsrabbitmqslave3"  
+      - "$PWD/sricatsrabbitmqslave3/rabbit_enabled_plugins:/etc/sricatsrabbitmqslave3/enabled_plugins"
