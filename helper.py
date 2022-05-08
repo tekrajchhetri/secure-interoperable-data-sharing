@@ -28,4 +28,15 @@ class Helpers:
                 "password":details["rabbitdetails"][1]["password"][0],
                 "hostname": details["rabbitdetails"][2]["host"][0],
                 "topic": details["rabbitdetails"][3]["topic"][0],
+                "port": details["rabbitdetails"][4]["port"][0],
+                "exchange": details["rabbitdetails"][5]["exchange"][0],
+                "queuename": details["rabbitdetails"][6]["queuename"][0]
+                }
+
+    def get_gdb_config_details(self):
+        details = self.read_yml("config.yml")
+        return {"username":details["graphdbdetails"][0]["username"][0],
+                "password":details["graphdbdetails"][1]["password"][0],
+                "hostname": details["graphdbdetails"][2]["host"][0],
+                "repository": details["graphdbdetails"][3]["repository"][0]
                 }
