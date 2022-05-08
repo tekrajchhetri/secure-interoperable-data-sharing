@@ -11,3 +11,5 @@ rabbitdetails:
       - 5672
   - exchange:
       - secure_interoperable_data_sharing
+  - queuename:
+      - secure_interoperable_data_sharing
