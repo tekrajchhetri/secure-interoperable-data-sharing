@@ -1,4 +1,0 @@
-temperature_sensor:
-  - sensor_mapper/temperature_sensor.yaml
-moisture_sensor:
-  - sensor_mapper/moisture_sensor.yaml
