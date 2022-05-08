@@ -1,0 +1,9 @@
+rabbitdetails:
+  - username:
+      - admin
+  - password:
+      - P@ssword
+  - host:
+      - 127.0.0.1
+  - topic:
+      - secure_interoperable_data_sharing
