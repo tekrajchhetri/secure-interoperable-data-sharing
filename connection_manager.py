@@ -8,9 +8,10 @@
 
 import pika
 from helper import Helpers
+from SPARQLWrapper import SPARQLWrapper, BASIC
 
 class ConnectionManager(Helpers):
-    def create_rabbit_connection(self):
+    def rabbit_connection(self):
         connection_details = self.get_rabbit_config_details()
         username = connection_details["username"]
         password = connection_details["password"]
@@ -25,3 +26,18 @@ class ConnectionManager(Helpers):
         )
         connection = pika.BlockingConnection(connection_parameters)
         return connection
+
+    def graphdb_connection(self, type="get"):
+        connection_details = self.get_gdb_config_details()
+        username = connection_details["username"]
+        password = connection_details["password"]
+        if type=="get":
+            hostname = f"{connection_details['hostname']}/{connection_details['repository']}"
+        elif type=="post":
+            hostname = f"{connection_details['hostname']}/{connection_details['repository']}/statements"
+        sparql = SPARQLWrapper(hostname)
+        sparql.setHTTPAuth(BASIC)
+        sparql.setCredentials(username, password)
+        return sparql
+
+
