@@ -1,0 +1,58 @@
+version: '2' 
+services:
+  stats:
+    image: bitnami/rabbitmq
+    environment:
+      - RABBITMQ_NODE_TYPE=stats
+      - RABBITMQ_USERNAME=admin
+      - RABBITMQ_PASSWORD=P@ssword
+      - RABBITMQ_NODE_NAME=sricats@stats 
+      - RABBITMQ_ERL_COOKIE=sricats1231R
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - 'rabbitmqstats_data:/bitnami'
+  queue-disc1:
+    image: bitnami/rabbitmq
+    environment:
+      - RABBITMQ_NODE_TYPE=queue-disc
+      - RABBITMQ_USERNAME=admin
+      - RABBITMQ_PASSWORD=P@ssword
+      - RABBITMQ_NODE_NAME=sricats@queue-disc1
+      - RABBITMQ_CLUSTER_NODE_NAME=sricats@stats
+      - RABBITMQ_ERL_COOKIE=sricats1231R
+    volumes:
+      - 'rabbitmqdisc1_data:/bitnami'
+
+  queue-disc2:
+    image: bitnami/rabbitmq
+    environment:
+      - RABBITMQ_NODE_TYPE=queue-disc
+      - RABBITMQ_USERNAME=admin
+      - RABBITMQ_PASSWORD=P@ssword
+      - RABBITMQ_NODE_NAME=sricats@queue-disc2
+      - RABBITMQ_CLUSTER_NODE_NAME=sricats@stats
+      - RABBITMQ_ERL_COOKIE=sricats1231R
+    volumes:
+      - 'rabbitmqdisc1_data:/bitnami'
+
+  queue-ram1:
+    image: bitnami/rabbitmq
+    environment:
+      - RABBITMQ_USERNAME=admin
+      - RABBITMQ_PASSWORD=P@ssword
+      - RABBITMQ_NODE_TYPE=queue-ram
+      - RABBITMQ_NODE_NAME=sricats@queue-ram1
+      - RABBITMQ_CLUSTER_NODE_NAME=sricats@stats
+      - RABBITMQ_ERL_COOKIE=sricats1231R
+    volumes:
+      - 'rabbitmqram1_data:/bitnami'
+
+volumes:
+  rabbitmqstats_data:
+    driver: local
+  rabbitmqdisc1_data:
+    driver: local
+  rabbitmqram1_data:
+    driver: local
