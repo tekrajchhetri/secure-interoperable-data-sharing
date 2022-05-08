@@ -13,3 +13,13 @@ rabbitdetails:
       - secure_interoperable_data_sharing
   - queuename:
       - secure_interoperable_data_sharing
+
+graphdbdetails:
+  - username:
+      - admin
+  - password:
+      - pwd
+  - host:
+      - https://smashhitactool.sti2.at/repositories
+  - repository:
+      - sensor_mapper_tek
