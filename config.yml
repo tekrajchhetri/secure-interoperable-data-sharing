@@ -7,3 +7,7 @@ rabbitdetails:
       - 127.0.0.1
   - topic:
       - secure_interoperable_data_sharing
+  - port:
+      - 5672
+  - exchange:
+      - secure_interoperable_data_sharing
