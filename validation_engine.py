@@ -8,7 +8,6 @@
 from helper import Helpers
 from shacl_shapes import SHACLShapes
 from pyshacl import validate
-from rdflib import Graph
 class ValidationEngine(Helpers):
     def data_quality_validation(self, data):
         """ perform validation of the received input data for quality
