@@ -20,6 +20,7 @@ class SHACLShapes:
             <observation/DS18B20_2022051010211961971> a sosa:Observation ;
                 :hasHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
                 om:hasUnit om:degreeCelsius;
+                sosa:resultTime "2005-02-28T00:00:00Z"^^xsd:dateTime;
                 sosa:hasSimpleResult "45.3"^^xsd:double ;
                 sosa:madeBySensor <sensor/DS18B20> ;
                 sosa:observedProperty <STI_W201_temperature> .
@@ -58,6 +59,14 @@ class SHACLShapes:
                                     sh:datatype  xsd:string;
                             ];
 
+                            sh:property
+                            [
+                                sh:path sosa:resultTime; 
+                                    sh:minCount 1;
+                                    sh:maxCount 1;  
+                                    sh:datatype xsd:dateTime;
+                            ];
+                            
                             sh:property
                             [
                                 sh:path om:hasUnit; 
@@ -109,6 +118,7 @@ class SHACLShapes:
             <observation/DS18B20_2022051010211961971> a sosa:Observation ;
                     :hasHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
                     om:hasUnit om:percent;
+                    sosa:resultTime "2005-02-28T00:00:00Z"^^xsd:dateTime;
                     sosa:hasSimpleResult "45.3"^^xsd:double ;
                     sosa:madeBySensor <sensor/DS18B20> ;
                     sosa:observedProperty <STI_W201_relativehumidity> .
@@ -146,7 +156,15 @@ class SHACLShapes:
                                     sh:maxLength 64 ;
                                     sh:datatype  xsd:string;
                             ];
-
+                            
+                            sh:property
+                            [
+                                sh:path sosa:resultTime; 
+                                    sh:minCount 1;
+                                    sh:maxCount 1;  
+                                    sh:datatype xsd:dateTime;
+                            ];
+                            
                             sh:property
                             [
                                 sh:path om:hasUnit;
