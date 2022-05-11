@@ -24,7 +24,7 @@ class Publish(ConnectionManager):
         data = {'observedproperty': 'STI_W201_humidity',
                 'observationsensorid': sensorname,
                 'observationresult': sensorobservationvalue,
-                'resultobservationtime': f"{formattedTimeStampDT}Z",
+                'resultobservationtime': f"{formattedTimeStampDT}",
                 'observationid': f'{sensorname}_{formattedTimeStampObservation}',
                 'hashvalue': self.generate_hash(formattedTimeStampObservation, sensorobservationvalue)
                 }
