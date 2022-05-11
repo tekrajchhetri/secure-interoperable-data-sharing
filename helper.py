@@ -12,8 +12,6 @@ from rdflib import Graph, Literal, XSD, RDF,URIRef
 from rdflib import Namespace
 
 class Helpers:
-    def __init__(self):
-        sys.stdout.write("init helpers")
 
     def read_yml(self, filename):
         # Open the file and load the file
