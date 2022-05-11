@@ -16,14 +16,17 @@ class Publish(ConnectionManager):
         return hashlib.sha256(bytes(str(int(noise_timestamp) + value), 'utf-8')).hexdigest()
 
     def generate_data(self):
-        sensorobservationvalue = random.randint(50,120)
-        timestampval = datetime.now().strftime("%Y%m%d%M%S%f")
-        data = {'observedproperty': 'STI_W201_temperature',
-                'observationsensorid': 'DS18B20',
+        sensorobservationvalue = random.randint(10,100)
+        timeStamp = datetime.now()
+        sensorname = "DTH11"
+        formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S%f")
+        formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S:%f")
+        data = {'observedproperty': 'STI_W201_humidity',
+                'observationsensorid': sensorname,
                 'observationresult': sensorobservationvalue,
-                'resultobservationtime': "2022-05-07",
-                'observationid': f'DS18B20_{timestampval}',
-                'hashvalue': self.generate_hash(timestampval, sensorobservationvalue)
+                'resultobservationtime': f"{formattedTimeStampDT}Z",
+                'observationid': f'{sensorname}_{formattedTimeStampObservation}',
+                'hashvalue': self.generate_hash(formattedTimeStampObservation, sensorobservationvalue)
                 }
         return json.dumps(data)
 
@@ -40,4 +43,3 @@ if __name__ == '__main__':
     p = Publish()
     message = p.generate_data()
     p.publish(message)
-        
