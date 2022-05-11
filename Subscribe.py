@@ -6,11 +6,11 @@
 # @File    : Subscribe.py
 # @Software: PyCharm
 from connection_manager import ConnectionManager
-from data_transformation_engine import DataTransformationEngine
+from Pipeline import Pipeline
 class Subscribe(ConnectionManager):
     def callback(self, ch, method, properties, body):
-        dte = DataTransformationEngine()
-        dte.transform(body)
+        pipeline = Pipeline()
+        pipeline.init_pipeline(body)
 
     def subscribe(self):
         connection = self.rabbit_connection()
@@ -20,8 +20,6 @@ class Subscribe(ConnectionManager):
             on_message_callback=self.callback,
             auto_ack=True)
         channel.start_consuming()
-
-
 
 if __name__ == '__main__':
     s = Subscribe()
