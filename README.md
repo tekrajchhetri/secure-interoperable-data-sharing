@@ -18,5 +18,8 @@
 ![Screenshot 2022-05-08 at 14 44 23](https://user-images.githubusercontent.com/52251022/167310605-ec203f7a-280f-4eee-acb6-52f2ee329100.png)
 
 # Softwares
-- Docker
-- Python 3.X
+- [Docker](https://www.docker.com)
+- [Python 3.X](https://www.python.org)
+- [pySHACL](https://github.com/RDFLib/pySHACL)
+- [rdflib](https://rdflib.readthedocs.io/en/stable/)
+- [Owlready2](https://owlready2.readthedocs.io/en/v0.37/)
