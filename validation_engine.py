@@ -14,6 +14,8 @@ import textwrap
 class ValidationEngine(Helpers):
     def validate(self, data):
         """ perform validation of the received input data
+           1. Integirty validation
+           2. Quality validation
         :param sensor data
             Example
             {'observedproperty': 'STI_W201_humidity',
