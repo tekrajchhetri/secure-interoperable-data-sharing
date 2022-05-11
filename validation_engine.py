@@ -16,8 +16,8 @@ class ValidationEngine(Helpers):
         """ perform validation of the received input data
            1. Integirty validation
            2. Quality validation
-        :param sensor data
-            Example
+        :param  data
+        Example
             {'observedproperty': 'STI_W201_humidity',
             'observationsensorid': 'DS18B20',
             'observationresult': 88.6,
