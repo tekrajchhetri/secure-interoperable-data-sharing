@@ -118,7 +118,7 @@ class SHACLShapes:
             <observation/DS18B20_2022051010211961971> a sosa:Observation ;
                     :hasHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
                     om:hasUnit om:percent;
-                    sosa:resultTime "2005-02-28T00:00:00Z"^^xsd:dateTime;
+                    sosa:resultTime "2005-02-28T00:00:00"^^xsd:dateTime;
                     sosa:hasSimpleResult "45.3"^^xsd:double ;
                     sosa:madeBySensor <sensor/DS18B20> ;
                     sosa:observedProperty <STI_W201_humidity> .
