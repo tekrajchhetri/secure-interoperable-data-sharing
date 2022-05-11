@@ -8,10 +8,12 @@
 from helper import Helpers
 from shacl_shapes import SHACLShapes
 from pyshacl import validate
-import json
+from datetime import datetime
+import hashlib
+import textwrap
 class ValidationEngine(Helpers):
-    def data_quality_validation(self, data):
-        """ perform validation of the received input data for quality
+    def validate(self, data):
+        """ perform validation of the received input data
         :param sensor data
             Example
             {'observedproperty': 'STI_W201_humidity',
@@ -23,20 +25,33 @@ class ValidationEngine(Helpers):
             }
         :return: boolean
         """
-        data = json.loads(data)
         data_graph = self.generate_shacl_data_graph(data)
-        data_graph = data_graph.serialize(format="turtle")
-        if "temperature" in data['observedproperty']:
-            shape_graph = SHACLShapes().temperature()
-        elif "humidity" in data['observedproperty']:
-            shape_graph = SHACLShapes().relative_humidity()
+        if self.validate_data_integrity(data_graph=data_graph, data_hash=self.get_hash(data)):
+            if "temperature" in data['observedproperty']:
+                shacl_graph = SHACLShapes().temperature()
+            elif "humidity" in data['observedproperty']:
+                shacl_graph = SHACLShapes().relative_humidity()
+            return self.validate_data_quality(data_graph=data_graph, shacl_graph=shacl_graph)
+        else:
+            return False
 
-        conforms, report, message = validate(data_graph, shacl_graph=shape_graph, advanced=True, debug=False)
+
+
+    def validate_data_quality(self, data_graph, shacl_graph):
+        data_graph = data_graph.serialize(format="turtle")
+        conforms, report, message = validate(data_graph, shacl_graph=shacl_graph, advanced=True, debug=False)
         return conforms
 
-    def data_integrity_validator(self, input_rdf):
-        """ Performs integrity checks of the data to ensure no data tampering is done
-        :param input_rdf: input data in RDF format
-        :return:
-        """
-        return False
+    def validate_data_integrity(self, data_graph, data_hash):
+        query = textwrap.dedent("""
+              ASK {{
+            ?s a sosa:Observation.
+            FILTER EXISTS {{?s sricats:hasHash ?o
+                FILTER (?o = "{0}"^^xsd:string)}}
+            }}""").format(data_hash)
+        qres = data_graph.query(query)
+        return bool(list(qres)[0])
+
+    def get_hash(self, data):
+        extractTimeStamp = datetime.strptime(data["resultobservationtime"], '%Y-%m-%dT%H:%M:%S:%f')
+        return hashlib.sha256(bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S%f")) + data["observationresult"]), 'utf-8')).hexdigest()
