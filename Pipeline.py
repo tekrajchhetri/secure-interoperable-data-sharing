@@ -14,11 +14,7 @@ class Pipeline:
 
     def init_pipeline(self, data):
         data = json.loads(data)
-        print()
-        print("From pipeline")
-        print(data)
-
-        print(ValidationEngine().data_quality_validation(data))
+        print(ValidationEngine().validate(data))
         # call legal engine
         # perform transformation
         # perform validation
