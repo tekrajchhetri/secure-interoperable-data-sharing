@@ -17,16 +17,16 @@ class SHACLShapes:
             @prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
             @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-            <observation/DS18B20_2022051010211961971> a sosa:Observation ;
-                :hasHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
-                om:hasUnit om:degreeCelsius;
-                sosa:resultTime "2005-02-28T00:00:00Z"^^xsd:dateTime;
-                sosa:hasSimpleResult "45.3"^^xsd:double ;
+            <observation/DS18B20_202205114824259234> a sosa:Observation ;
+                om:hasUnit om:degreeCelsius ;
+                sricats:hasHash "21449ca6d0e585d666dac4c24f51c1a0c047e2d45f229fddbaf115361d843c24"^^xsd:string ;
+                sosa:hasSimpleResult 8.1e+01 ;
                 sosa:madeBySensor <sensor/DS18B20> ;
-                sosa:observedProperty <STI_W201_temperature> .
+                sosa:observedProperty <STI_W201_temperature> ;
+                sosa:resultTime "2022-05-11T09:48:24"^^xsd:dateTime .
 
             <sensor/DS18B20> a sosa:Sensor ;
-                sosa:observes <observation/DS18B20_2022051010211961971> .
+                sosa:observes <observation/DS18B20_202205114824259234> .
 
         :return: string
         """
@@ -121,7 +121,7 @@ class SHACLShapes:
                     sosa:resultTime "2005-02-28T00:00:00Z"^^xsd:dateTime;
                     sosa:hasSimpleResult "45.3"^^xsd:double ;
                     sosa:madeBySensor <sensor/DS18B20> ;
-                    sosa:observedProperty <STI_W201_relativehumidity> .
+                    sosa:observedProperty <STI_W201_humidity> .
 
             <sensor/DS18B20> a sosa:Sensor ;
                 sosa:observes <observation/DS18B20_2022051010211961971> .
