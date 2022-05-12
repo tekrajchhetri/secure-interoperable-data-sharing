@@ -16,6 +16,7 @@ class DataMigration:
             PREFIX sosa: <http://www.w3.org/ns/sosa/>  
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>  
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+            PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> 
         """)
         return prefix
 
