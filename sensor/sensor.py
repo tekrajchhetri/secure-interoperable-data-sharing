@@ -28,8 +28,9 @@ class Sensor:
         while True:
             humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
                                                             sensor_config["sensor"][1]["gpio_pin"][0])
-            print(f"Humidity = {humidity}%, Temperature={temperature} degree Celcius")
+            sys.stdout.write("Sending activitySensor data to Messaging Server")
             message = publishmsg.format_data(temperature)
             publishmsg.publish(message)
             message = publishmsg.format_data(humidity,"humidity")
             publishmsg.publish(message)
+            sys.stdout.write("Send completed")
