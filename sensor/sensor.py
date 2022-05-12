@@ -34,8 +34,3 @@ class Sensor:
             self.publish.publish(message)
             message = self.publish.format_data(humidity,"humidity")
             self.publish.publish(message)
-
-
-if __name__ == '__main__':
-    s = Sensor()
-    s.read_sensor_data()

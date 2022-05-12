@@ -3,12 +3,13 @@
 # @Author  : Tek Raj Chhetri
 # @Email   : tekraj.chhetri@sti2.at
 # @Web     : https://tekrajchhetri.com/
-# @File    : start.py
+# @File    : start_publish.py
 # @Software: PyCharm
 
-from subscriber.Subscribe import Subscribe
+from sensor.sensor import Sensor
 
+from publisher.Publish import Publish
 if __name__ == '__main__':
-    s = Subscribe()
-    s.subscribe()
+    s = Sensor()
+    s.read_sensor_data()
 
