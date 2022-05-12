@@ -5,8 +5,7 @@
 # @Web     : https://tekrajchhetri.com/
 # @File    : Pipeline.py
 # @Software: PyCharm
-from validation_engine import ValidationEngine
-from data_migration import DataMigration
+from validation.validation_engine import ValidationEngine
 import json
 class Pipeline:
     def __int__(self):

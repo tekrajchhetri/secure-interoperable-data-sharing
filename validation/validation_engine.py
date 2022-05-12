@@ -5,8 +5,8 @@
 # @Web     : https://tekrajchhetri.com/
 # @File    : validation_engine.py
 # @Software: PyCharm
-from helper import Helpers
-from shacl_shapes import SHACLShapes
+from helper.helper import Helpers
+from validation.shacl_shapes import SHACLShapes
 from pyshacl import validate
 from datetime import datetime
 import hashlib

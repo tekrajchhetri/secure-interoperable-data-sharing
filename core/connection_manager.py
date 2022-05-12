@@ -7,7 +7,7 @@
 # @Software: PyCharm
 
 import pika
-from helper import Helpers
+from helper.helper import Helpers
 from SPARQLWrapper import SPARQLWrapper, BASIC
 
 class ConnectionManager(Helpers):
@@ -24,6 +24,7 @@ class ConnectionManager(Helpers):
             virtual_host="/",
             credentials=credentials
         )
+
         connection = pika.BlockingConnection(connection_parameters)
         return connection
 

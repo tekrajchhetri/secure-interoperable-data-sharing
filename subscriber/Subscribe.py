@@ -5,8 +5,8 @@
 # @Web     : https://tekrajchhetri.com/
 # @File    : Subscribe.py
 # @Software: PyCharm
-from connection_manager import ConnectionManager
-from Pipeline import Pipeline
+from core.connection_manager import ConnectionManager
+from pipeline.Pipeline import Pipeline
 class Subscribe(ConnectionManager):
     def callback(self, ch, method, properties, body):
         pipeline = Pipeline()

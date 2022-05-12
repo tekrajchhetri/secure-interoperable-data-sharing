@@ -7,7 +7,7 @@
 # @Software: PyCharm
 import sys
 
-from data_migration import DataMigration
+from data_migrator.data_migration import DataMigration
 import textwrap
 import json
 class DataTransformationEngine:

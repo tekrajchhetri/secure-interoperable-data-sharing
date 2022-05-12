@@ -1,5 +1,6 @@
 sensor:
-  - name:
-      - Adafruit_DHT.DHT11
   - gpio_pin:
       - 4
+  - name:
+      - Adafruit_DHT.DHT11
+

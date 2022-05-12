@@ -5,11 +5,12 @@
 # @Web     : https://tekrajchhetri.com/
 # @File    : Publish.py
 # @Software: PyCharm
-from connection_manager import ConnectionManager
+from core.connection_manager import ConnectionManager
 import hashlib
 from datetime import datetime
 import json
-import random
+
+
 class Publish(ConnectionManager):
 
     def generate_hash(self, noise_timestamp, value):
@@ -37,9 +38,3 @@ class Publish(ConnectionManager):
                               routing_key=self.get_rabbit_config_details()["topic"],
                               body=message)
         connection.close()
-
-
-if __name__ == '__main__':
-    p = Publish()
-    message = p.format_data()
-    p.publish(message)

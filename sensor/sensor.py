@@ -9,7 +9,7 @@ import Adafruit_DHT
 import yaml
 from yaml.loader import SafeLoader
 import sys
-from ../Publish import Publish
+from  publisher.Publish import Publish
 
 class Sensor:
     def __int__(self):

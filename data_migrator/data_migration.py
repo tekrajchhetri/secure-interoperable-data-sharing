@@ -6,7 +6,7 @@
 # @File    : data_migration.py
 # @Software: PyCharm
 import textwrap
-from connection_manager import ConnectionManager
+from core.connection_manager import ConnectionManager
 from SPARQLWrapper import  POST
 
 class DataMigration:
