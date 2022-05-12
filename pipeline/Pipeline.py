@@ -7,13 +7,19 @@
 # @Software: PyCharm
 from validation.validation_engine import ValidationEngine
 import json
+from data_migrator.data_migration import DataMigration
+from data_transformation.data_transformation_engine import DataTransformationEngine
 class Pipeline:
-    def __int__(self):
-        self.ve = ValidationEngine()
 
     def init_pipeline(self, data):
         data = json.loads(data)
-        print(ValidationEngine().validate(data))
+        if(ValidationEngine().validate(data)):
+            transformed_data = DataTransformationEngine().transform(data=data)
+            status = DataMigration().migrate_to_gdb(transformed_data)
+            print(data)
+            return status
+
+
         # call legal engine
         # perform transformation
         # perform validation
