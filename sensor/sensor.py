@@ -24,8 +24,8 @@ class Sensor:
     def read_sensor_data(self):
         sensor_config = self.read_yml("sensor_config.yml")
         while True:
-            humidity, temperature = Adafruit_DHT.read_retry(sensor_config["sensor"][0]["name"][0],
-                                                            sensor_config["sensor"][0]["gpio_pin"][0])
+            humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
+                                                            sensor_config["sensor"][1]["gpio_pin"][0])
             print(f"Humidity = {humidity}%, Temperature={temperature} degree Celcius")
 
 
