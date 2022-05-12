@@ -14,8 +14,9 @@
 - Create a queue (go to queues tab) with a name *secure_interoperable_data_sharing*  (or based on what you've defined in config.yml)
 - Create exchange of type *topic*, routing key and assign (or bind) it to newly created queue. The name for both routing key and exchange is the same, which is *secure_interoperable_data_sharing*. IF you wish to change, you can do so in *config.yml*.
 
-# KG Instance
-![Screenshot 2022-05-08 at 14 44 23](https://user-images.githubusercontent.com/52251022/167310605-ec203f7a-280f-4eee-acb6-52f2ee329100.png)
+# KG Instance 
+![Screenshot 2022-05-12 at 14 35 32](https://user-images.githubusercontent.com/52251022/168093950-a1a621cc-a437-456e-a94a-0ae1ccf97b3a.png)
+
 
 # Softwares
 - [Docker](https://www.docker.com)
