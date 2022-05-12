@@ -9,8 +9,11 @@ import Adafruit_DHT
 import yaml
 from yaml.loader import SafeLoader
 import sys
+from ../Publish import Publish
 
 class Sensor:
+    def __int__(self):
+        self.publish = Publish()
     def read_yml(self, filename):
         # Open the file and load the file
         try:
@@ -27,6 +30,10 @@ class Sensor:
             humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
                                                             sensor_config["sensor"][1]["gpio_pin"][0])
             print(f"Humidity = {humidity}%, Temperature={temperature} degree Celcius")
+            message = self.publish.format_data(temperature)
+            self.publish.publish(message)
+            message = self.publish.format_data(humidity,"humidity")
+            self.publish.publish(message)
 
 
 if __name__ == '__main__':
