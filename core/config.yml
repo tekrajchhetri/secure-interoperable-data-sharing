@@ -4,7 +4,7 @@ rabbitdetails:
   - password:
       - P@ssword
   - host:
-      - 127.0.0.1
+      - 138.232.18.143
   - topic:
       - secure_interoperable_data_sharing
   - port:
@@ -18,7 +18,7 @@ graphdbdetails:
   - username:
       - admin
   - password:
-      - pwd
+      - password
   - host:
       - https://smashhitactool.sti2.at/repositories
   - repository:
