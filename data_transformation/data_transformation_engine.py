@@ -7,13 +7,16 @@
 # @Software: PyCharm
 import sys
 
-from data_migrator.data_migration import DataMigration
+
 import textwrap
-import json
 class DataTransformationEngine:
 
+    def get_unit(self, data):
+        if "temperature" in data['observedproperty']:
+            return "om:degreeCelsius"
+        elif "humidity" in data['observedproperty']:
+            return "om:percent"
     def transform(self, data):
-        data = json.loads(data)
         if type(data) != dict:
             raise TypeError("Data should be of type dictionary")
         transformed_data = textwrap.dedent("""
@@ -22,6 +25,7 @@ class DataTransformationEngine:
                 sosa:madeBySensor :sensor\/{0} ;
                 sosa:resultTime :{2};
                 :hasHash :{5};
+                om:hasUnit :{6};
                 sosa:observedProperty :{3} .
                 :sensor\/{0} a sosa:Sensor ;
                 sosa:observes :observation\/{4} .
@@ -31,8 +35,8 @@ class DataTransformationEngine:
                     data["resultobservationtime"],
                     data["observedproperty"],
                     data["observationid"],
-                    data["hashvalue"]
+                    data["hashvalue"],
+                    self.get_unit(data=data)
                    )
-        dm = DataMigration()
-        status = dm.migrate_to_gdb(transformed_data)
-        sys.stdout.write(status)
+
+        return transformed_data
