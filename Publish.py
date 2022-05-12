@@ -15,13 +15,13 @@ class Publish(ConnectionManager):
     def generate_hash(self, noise_timestamp, value):
         return hashlib.sha256(bytes(str(int(noise_timestamp) + value), 'utf-8')).hexdigest()
 
-    def generate_data(self):
-        sensorobservationvalue = random.randint(10,100)
+    def format_data(self, sensorobservationvalue, type="temperature"):
+        observed_property = f'STI_W201_{type}'
         timeStamp = datetime.now()
         sensorname = "DTH11"
         formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S%f")
         formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S:%f")
-        data = {'observedproperty': 'STI_W201_humidity',
+        data = {'observedproperty': observed_property,
                 'observationsensorid': sensorname,
                 'observationresult': sensorobservationvalue,
                 'resultobservationtime': f"{formattedTimeStampDT}",
@@ -41,5 +41,5 @@ class Publish(ConnectionManager):
 
 if __name__ == '__main__':
     p = Publish()
-    message = p.generate_data()
+    message = p.format_data()
     p.publish(message)
