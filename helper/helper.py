@@ -27,10 +27,13 @@ class Helpers:
         return {"username":details["rabbitdetails"][0]["username"][0],
                 "password":details["rabbitdetails"][1]["password"][0],
                 "hostname": details["rabbitdetails"][2]["host"][0],
-                "topic": details["rabbitdetails"][3]["topic"][0],
+                "data_publish_topic": details["rabbitdetails"][3]["data_publish_topic"][0],
                 "port": details["rabbitdetails"][4]["port"][0],
-                "exchange": details["rabbitdetails"][5]["exchange"][0],
-                "queuename": details["rabbitdetails"][6]["queuename"][0]
+                "data_publish_exchange": details["rabbitdetails"][5]["data_publish_exchange"][0],
+                "queuename": details["rabbitdetails"][6]["queuename"][0],
+                "data_publish_topic": details["rabbitdetails"][7]["data_publish_topic"][0],
+                "result_publish_exchange": details["rabbitdetails"][8]["result_publish_exchange"][0],
+
                 }
 
     def get_gdb_config_details(self):

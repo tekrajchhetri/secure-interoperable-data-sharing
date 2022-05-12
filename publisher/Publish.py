@@ -31,10 +31,17 @@ class Publish(ConnectionManager):
                 }
         return json.dumps(data)
 
-    def publish(self, message):
+    def publish(self, message, type):
         connection = self.rabbit_connection()
+        if type == "data":
+            exchange_name = self.get_rabbit_config_details()["data_publish_exchange"]
+            topic = self.get_rabbit_config_details()["data_publish_topic"]
+        elif type == "results":
+            exchange_name = self.get_rabbit_config_details()["result_publish_exchange"]
+            topic = self.get_rabbit_config_details()["result_publish_topic"]
+
         channel = connection.channel()
-        channel.basic_publish(exchange=self.get_rabbit_config_details()["exchange"],
-                              routing_key=self.get_rabbit_config_details()["topic"],
+        channel.basic_publish(exchange=exchange_name,
+                              routing_key=topic,
                               body=message)
         connection.close()

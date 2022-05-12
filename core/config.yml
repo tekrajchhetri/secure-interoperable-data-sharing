@@ -5,14 +5,18 @@ rabbitdetails:
       - P@ssword
   - host:
       - 138.232.18.143
-  - topic:
+  - data_publish_topic:
       - secure_interoperable_data_sharing
   - port:
       - 5672
-  - exchange:
+  - data_publish_exchange:
       - secure_interoperable_data_sharing
   - queuename:
       - secure_interoperable_data_sharing
+  - result_publish_topic:
+      - reasoning_result_secure_interoperable_data_sharing
+  - result_publish_exchange:
+      - reasoning_result_secure_interoperable_data_sharing
 
 graphdbdetails:
   - username:
