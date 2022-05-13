@@ -36,7 +36,7 @@ class Publish(ConnectionManager):
         if type == "data":
             exchange_name = self.get_rabbit_config_details()["data_publish_exchange"]
             topic = self.get_rabbit_config_details()["data_publish_topic"]
-        elif type == "results":
+        elif type == "result":
             exchange_name = self.get_rabbit_config_details()["result_publish_exchange"]
             topic = self.get_rabbit_config_details()["result_publish_topic"]
 
