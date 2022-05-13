@@ -18,10 +18,12 @@ class Pipeline:
     def validate_transform_migrate(self, data):
         data = json.loads(data)
         if LegalEngine().hasConsent(data=data):
-            if(ValidationEngine().validate(data)):
-                transformed_data = DataTransformationEngine().transform(data=data)
+            validation_result = ValidationEngine().validate(data)
+            if(validation_result["status"]):
+                transformed_data = DataTransformationEngine().transform(rdf_data=validation_result["rdf_turtle_data"])
                 status = DataMigration().migrate_to_gdb(transformed_data)
-                return status
+                print(status)
+                return status 
         else:
             print({"message":"Unable to process due to a lack of consent for the requested operation."})
 
