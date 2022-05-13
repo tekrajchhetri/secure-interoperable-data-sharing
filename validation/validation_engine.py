@@ -27,21 +27,24 @@ class ValidationEngine(Helpers):
             }
         :return: boolean
         """
-        data_graph = self.generate_shacl_data_graph(data)
-        if self.validate_data_integrity(data_graph=data_graph, data_hash=self.get_hash(data)):
+        data_graph_v = self.generate_shacl_data_graph(data)
+        if self.validate_data_integrity(data_graph=data_graph_v, data_hash=self.get_hash(data)):
             if "temperature" in data['observedproperty']:
-                shacl_graph = SHACLShapes().temperature()
+                shacl_graph_v = SHACLShapes().temperature()
             elif "humidity" in data['observedproperty']:
-                shacl_graph = SHACLShapes().relative_humidity()
-            return self.validate_data_quality(data_graph=data_graph, shacl_graph=shacl_graph)
+                shacl_graph_v = SHACLShapes().relative_humidity()
+            if self.validate_data_quality(data_graph_v=data_graph_v, shacl_graph_v=shacl_graph_v):
+                return {"status":True, "rdf_turtle_data":data_graph_v}
+            else:
+                return {"status": False}
         else:
             return False
 
 
 
-    def validate_data_quality(self, data_graph, shacl_graph):
-        data_graph = data_graph.serialize(format="turtle")
-        conforms, report, message = validate(data_graph, shacl_graph=shacl_graph, advanced=True, debug=False)
+    def validate_data_quality(self, data_graph_v, shacl_graph_v):
+        data_graph_v = data_graph_v.serialize(format="turtle")
+        conforms, report, message = validate(data_graph=data_graph_v, shacl_graph=shacl_graph_v, advanced=True, debug=False)
         return conforms
 
     def validate_data_integrity(self, data_graph, data_hash):

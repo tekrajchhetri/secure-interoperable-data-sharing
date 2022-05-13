@@ -13,4 +13,4 @@ class LegalEngine:
         :param data:
         :return:
         """
-        return False
+        return True
