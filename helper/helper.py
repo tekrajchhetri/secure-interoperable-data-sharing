@@ -36,6 +36,10 @@ class Helpers:
 
                 }
 
+    def edge_intelligence_mode(self):
+        details = self.read_yml("core/config.yml")
+        return {"intelligence_mode":details["edgeintelligencemode"][0]["mode"][0] }
+
     def get_gdb_config_details(self):
         details = self.read_yml("core/config.yml")
         return {"username":details["graphdbdetails"][0]["username"][0],
@@ -68,3 +72,4 @@ class Helpers:
             g.add((obs, OM['hasUnit'], OM["percent"]))
         g.add((obs, SRICATS['hasHash'], Literal(data['hashvalue'], datatype=XSD.string)))
         return g
+
