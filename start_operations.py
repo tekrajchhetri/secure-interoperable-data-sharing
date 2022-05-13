@@ -3,7 +3,7 @@
 # @Author  : Tek Raj Chhetri
 # @Email   : tekraj.chhetri@sti2.at
 # @Web     : https://tekrajchhetri.com/
-# @File    : subscribe.py
+# @File    : start_operations.py
 # @Software: PyCharm
 
 from subscriber.Subscribe import Subscribe
