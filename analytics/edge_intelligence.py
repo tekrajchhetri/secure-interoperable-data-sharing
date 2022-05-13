@@ -7,7 +7,8 @@
 # @Software: PyCharm
 from owlready2 import *
 from analytics.rules import Rules
-
+from publisher.Publish import Publish
+import json
 class EdgeIntelligence:
     def get_name_space(self):
         onto_sensor = get_ontology("http://www.tekrajchhetri.com/sricats")
@@ -18,28 +19,49 @@ class EdgeIntelligence:
 
 
     def load_ontology(self):
-        return get_ontology("ontology_sricats.owl").load()
+        return get_ontology("core/ontology_sricats.owl").load()
 
-    def perform_reasoning(self, type, value):
+    def reasoning(self, value, rtype):
         onto = self.load_ontology()
         onto_sensor, sensor_namespace, measurement_unit_namespace = self.get_name_space()
         with onto:
             rules = Imp()
-            rules.set_as_rule(Rules().get_swrl_rules()[type], namespaces=[onto_sensor,
-                                                                                         sensor_namespace,
-                                                                                         measurement_unit_namespace])
-        reasoning = sensor_namespace.Observation(hasSimpleResult=value)
+            rules.set_as_rule(Rules().get_swrl_rules()[rtype], namespaces=[onto_sensor,
+                                                                          sensor_namespace,
+                                                                          measurement_unit_namespace])
+            reasoning = sensor_namespace.Observation(hasSimpleResult=value, hasedgeReasoningType=rtype)
+            t = sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
+            return  self.reasoning_result(reasoning.is_a,rtype)
 
-        sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
-        return  self.reasoning_result(reasoning.is_a)
 
-
-    def reasoning_result(self, result):
+    def reasoning_result(self, result,rtype):
+        key = f"alert"
         if len(result) == 2:
-            return {"alert":str(result[1]).split(".")[1]}
-        else:
-            return {"alert":"None"}
 
-if __name__ == '__main__':
-    e  = EdgeIntelligence()
-    print(e.perform_reasoning("humidity",110.0))
+            return {key:str(result[1]).split(".")[1]}
+        else:
+            return {key:"None"}
+
+    def start_edge_intelligence(self, data, mode):
+        """ Starts the analytics
+        :param data: Published Sensor data
+        :param mode: what mode reasoning is running
+        :edge - returns result immediately
+        :fog - publishes the result to a topic defined in config file
+        :return: dict
+        """
+        if "temperature" in data['observedproperty']:
+            rtype = "temperature"
+
+        if "humidity" in data['observedproperty']:
+            rtype="humidity"
+        result = self.reasoning(value=data["observationresult"],rtype=rtype)
+
+        result["observationsensorid"] = data["observationsensorid"]
+        result["observedproperty"] = data["observedproperty"]
+        if mode == "fog":
+            Publish().publish(message=json.dumps(result), type="result")
+        else:
+
+            return result
+
