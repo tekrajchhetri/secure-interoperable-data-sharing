@@ -48,7 +48,6 @@ class Helpers:
                 "repository": details["graphdbdetails"][3]["repository"][0]
                 }
 
-
     def generate_shacl_data_graph(self, data):
         SRICATS = Namespace("http://www.tekrajchhetri.com/sricats/")
         SOSA = Namespace("http://www.w3.org/ns/sosa/")
@@ -57,13 +56,13 @@ class Helpers:
         g.bind('sosa', SOSA)
         g.bind('sricats', SRICATS)
         g.bind('om', OM)
-        sensor = URIRef(f"sensor/{data['observationsensorid']}")
-        obs = URIRef(f"observation/{data['observationid']}")
+        sensor = URIRef(f"{SOSA['Sensor']}/{data['observationsensorid']}")
+        obs = URIRef(f"{SOSA['Observation']}/{data['observationid']}")
         g.add((sensor, RDF.type, SOSA['Sensor']))
         g.add((sensor, SOSA["observes"], obs))
         g.add((obs, RDF.type, SOSA['Observation']))
         g.add((obs, SOSA['madeBySensor'], sensor))
-        g.add((obs, SOSA['observedProperty'], URIRef(data['observedproperty'])))
+        g.add((obs, SOSA['observedProperty'], URIRef(f"{SOSA['observedProperty']}/{data['observedproperty']}")))
         g.add((obs, SOSA['hasSimpleResult'], Literal(data['observationresult'], datatype=XSD.double)))
         g.add((obs, SOSA['resultTime'], Literal(data['resultobservationtime'], datatype=XSD.dateTime)))
         if "temperature" in data['observedproperty']:
