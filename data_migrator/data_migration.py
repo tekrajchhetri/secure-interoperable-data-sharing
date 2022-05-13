@@ -10,25 +10,9 @@ from core.connection_manager import ConnectionManager
 from SPARQLWrapper import  POST
 
 class DataMigration:
-    def prefix(self):
-        prefix = textwrap.dedent("""
-            PREFIX : <http://tekrajchhetri.com/sricats#> 
-            PREFIX sosa: <http://www.w3.org/ns/sosa/>  
-            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>  
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-            PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> 
-        """)
-        return prefix
-
-    def migrate_to_gdb(self, data):
-        query = textwrap.dedent("""{0} 
-                    INSERT DATA {{ 
-                    {1}
-                    }}
-
-                """).format(self.prefix(),
-                             data
-                            )
+    def migrate_to_gdb(self, triples):
+        query = """
+        INSERT DATA {GRAPH <http://www.tekrajchhetri.com/sricats> {""" + triples + """}}"""
         cm = ConnectionManager()
         sparql = cm.graphdb_connection(type="post")
         sparql.setMethod(POST)
