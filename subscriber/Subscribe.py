@@ -10,7 +10,8 @@ from pipeline.Pipeline import Pipeline
 class Subscribe(ConnectionManager):
     def callback(self, ch, method, properties, body):
         pipeline = Pipeline()
-        pipeline.init_pipeline(body)
+        r = pipeline.validate_transform_migrate(body)
+        pipeline.validate_apply_intelligence(body)
 
     def subscribe(self):
         connection = self.rabbit_connection()
@@ -20,7 +21,3 @@ class Subscribe(ConnectionManager):
             on_message_callback=self.callback,
             auto_ack=True)
         channel.start_consuming()
-
-if __name__ == '__main__':
-    s = Subscribe()
-    s.subscribe()
