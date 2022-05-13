@@ -23,7 +23,7 @@ class Pipeline:
                 status = DataMigration().migrate_to_gdb(transformed_data)
                 return status
         else:
-            print({"message":"No consent for operations"})
+            print({"message":"Unable to process due to a lack of consent for the requested operation."})
 
     def validate_apply_intelligence(self, data):
         data = json.loads(data)
@@ -36,6 +36,6 @@ class Pipeline:
                 else:
                     EdgeIntelligence().start_edge_intelligence(data, mode)
         else:
-            print({"message":"No consent for operations"})
+            print({"message":"Unable to process due to a lack of consent for the requested operation."})
 
 
