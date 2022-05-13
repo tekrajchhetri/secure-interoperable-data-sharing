@@ -12,12 +12,16 @@ class Rules:
         swrl_rules = {
            "temperature": """Observation(?observation),  
                     hasSimpleResult(?observation, ?result),
-                    greaterThanOrEqual(?result, 75.0),
+                    hasedgeReasoningType(?observation, ?reasoningType), 
+                    containsIgnoreCase(?reasoningType, "temperature"),
+                    greaterThanOrEqual(?result, 15.0),
                     -> TemperatureAlert(?observation)""",
 
             "humidity": """Observation(?observation),  
+                    hasedgeReasoningType(?observation, ?reasoningType), 
+                    containsIgnoreCase(?reasoningType, "humidity"),
                     hasSimpleResult(?observation, ?result),
-                    greaterThanOrEqual(?result, 65.0),
+                    greaterThanOrEqual(?result, 35.0),
                     -> HumidityAlert(?observation)""",
 
         }
