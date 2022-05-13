@@ -18,11 +18,15 @@ rabbitdetails:
   - result_publish_exchange:
       - reasoning_result_secure_interoperable_data_sharing
 
+edgeintelligencemode:
+  - mode:
+      - edge
+
 graphdbdetails:
   - username:
       - admin
   - password:
-      - password
+      - Sm@shHitA_CT00L
   - host:
       - https://smashhitactool.sti2.at/repositories
   - repository:
