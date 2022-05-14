@@ -10,6 +10,8 @@ from analytics.rules import Rules
 from publisher.Publish import Publish
 import json
 class EdgeIntelligence:
+    def __int__(self):
+        self.load_ontology = get_ontology("core/ontology_sricats.owl").load()
     def get_name_space(self):
         onto_sensor = get_ontology("http://www.tekrajchhetri.com/sricats")
         sensor_namespace = onto_sensor.get_namespace("http://www.w3.org/ns/sosa")
@@ -17,12 +19,8 @@ class EdgeIntelligence:
             "http://www.ontology-of-units-of-measure.org/resource/om-2")
         return [onto_sensor,sensor_namespace,measurement_unit_namespace]
 
-
-    def load_ontology(self):
-        return get_ontology("core/ontology_sricats.owl").load()
-
     def reasoning(self, value, rtype):
-        onto = self.load_ontology()
+        onto = self.load_ontology
         onto_sensor, sensor_namespace, measurement_unit_namespace = self.get_name_space()
         with onto:
             rules = Imp()
