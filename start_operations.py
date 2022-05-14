@@ -6,7 +6,19 @@
 # @File    : start_operations.py
 # @Software: PyCharm
 
+from sensor.sensor import Sensor
+from helper.helper import Helpers
+from pipeline.Pipeline import Pipeline
 from subscriber.Subscribe import Subscribe
 if __name__ == '__main__':
-    s = Subscribe()
-    s.subscribe()
+    s = Sensor()
+    pipeline = Pipeline()
+    mode = Helpers().edge_intelligence_mode()["intelligence_mode"]
+    if mode == "edge":
+        sensor_data = s.read_sensor_data(mode=mode)
+        pipeline.validate_transform_migrate(sensor_data)
+        pipeline.validate_apply_intelligence(sensor_data)
+
+    else:
+        s = Subscribe()
+        s.subscribe()

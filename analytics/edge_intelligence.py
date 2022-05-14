@@ -56,12 +56,10 @@ class EdgeIntelligence:
         if "humidity" in data['observedproperty']:
             rtype="humidity"
         result = self.reasoning(value=data["observationresult"],rtype=rtype)
-
         result["observationsensorid"] = data["observationsensorid"]
         result["observedproperty"] = data["observedproperty"]
-        if mode == "fog":
-            Publish().publish(message=json.dumps(result), type="result")
-        else:
-
+        if mode == "edge":
             return result
+        else:
+            Publish().publish(message=json.dumps(result), type="result")
 

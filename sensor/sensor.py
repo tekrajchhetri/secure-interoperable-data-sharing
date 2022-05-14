@@ -22,15 +22,20 @@ class Sensor:
             sys.stderr.write("File not found")
 
 
-    def read_sensor_data(self):
+    def read_sensor_data(self, mode):
         publishmsg = Publish()
         sensor_config = self.read_yml("sensor/sensor_config.yml")
         while True:
             humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
                                                             sensor_config["sensor"][1]["gpio_pin"][0])
-            sys.stdout.write("Sending activitySensor data to Messaging Server")
-            message = publishmsg.format_data(temperature)
-            publishmsg.publish(message, "data")
-            message = publishmsg.format_data(humidity,"humidity")
-            publishmsg.publish(message, "data")
-            sys.stdout.write("Send completed")
+            message_temp = publishmsg.format_data(temperature)
+            message_humidity = publishmsg.format_data(humidity, "humidity")
+            if mode=="edge":
+                # if we want to run on the edge device, there's no need to publish data to mesaging server
+                # we can directly performing all the tasks and send the Kg to GraphDB
+                return {"temperature": message_temp, "humidity":message_humidity}
+            else:
+                sys.stdout.write("Sending activitySensor data to Messaging Server")
+                publishmsg.publish(message_temp, "data")
+                publishmsg.publish(message_humidity, "data")
+                sys.stdout.write("Send completed")
