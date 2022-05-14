@@ -55,6 +55,9 @@ class EdgeIntelligence:
 
         if "humidity" in data['observedproperty']:
             rtype="humidity"
+        if mode=="edge":
+            # for resource constraint devices
+            owlready2.reasoning.JAVA_MEMORY=1000
         result = self.reasoning(value=data["observationresult"],rtype=rtype)
         result["observationsensorid"] = data["observationsensorid"]
         result["observedproperty"] = data["observedproperty"]
