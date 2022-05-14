@@ -33,6 +33,7 @@ class Helpers:
                 "queuename": details["rabbitdetails"][6]["queuename"][0],
                 "result_publish_topic": details["rabbitdetails"][7]["result_publish_topic"][0],
                 "result_publish_exchange": details["rabbitdetails"][8]["result_publish_exchange"][0],
+                "result_queue": details["rabbitdetails"][9]["result_queue"][0]
 
                 }
 

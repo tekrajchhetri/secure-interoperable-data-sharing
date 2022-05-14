@@ -13,11 +13,25 @@ class Subscribe(ConnectionManager):
         r = pipeline.validate_transform_migrate(body)
         pipeline.validate_apply_intelligence(body)
 
+    def fog_result_callback(self, ch, method, properties, body):
+        """This is where you'd implement call to control action based on fog results
+        """
+        print(body)
+
     def subscribe(self):
         connection = self.rabbit_connection()
         channel = connection.channel()
         channel.basic_consume(
             queue=self.get_rabbit_config_details()["queuename"],
             on_message_callback=self.callback,
+            auto_ack=True)
+        channel.start_consuming()
+
+    def subscribe_fog_result(self):
+        connection = self.rabbit_connection()
+        channel = connection.channel()
+        channel.basic_consume(
+            queue=self.get_rabbit_config_details()["result_queue"],
+            on_message_callback=self.fog_result_callback,
             auto_ack=True)
         channel.start_consuming()

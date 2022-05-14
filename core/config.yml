@@ -17,16 +17,18 @@ rabbitdetails:
       - reasoning_result_secure_interoperable_data_sharing
   - result_publish_exchange:
       - reasoning_result_secure_interoperable_data_sharing
+  - result_queue:
+      - reasoning_result_secure_interoperable_data_sharing
 
 edgeintelligencemode:
   - mode:
-      - edge
+      - fog
 
 graphdbdetails:
   - username:
       - admin
   - password:
-      - Sm@shHitA_CT00L
+      - password
   - host:
       - https://smashhitactool.sti2.at/repositories
   - repository:
