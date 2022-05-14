@@ -61,6 +61,7 @@ class EdgeIntelligence:
         result = self.reasoning(value=data["observationresult"],rtype=rtype)
         result["observationsensorid"] = data["observationsensorid"]
         result["observedproperty"] = data["observedproperty"]
+        result["observationid"] = data["observationid"]
         if mode == "edge":
             return result
         else:
