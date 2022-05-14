@@ -11,9 +11,5 @@ from sensor.sensor import Sensor
 from publisher.Publish import Publish
 if __name__ == '__main__':
     s = Sensor()
-    s.read_sensor_data()
-    # p = Publish()
-    # msg = p.format_data(55)
-    # print(msg)
-    # p.publish(msg, "data")
+    s.read_sensor_data("fog")
 
