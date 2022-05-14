@@ -16,9 +16,10 @@ if __name__ == '__main__':
     mode = Helpers().edge_intelligence_mode()["intelligence_mode"]
     if mode == "edge":
         sensor_data = s.read_sensor_data(mode=mode)
-        pipeline.validate_transform_migrate(sensor_data)
-        pipeline.validate_apply_intelligence(sensor_data)
-
+        pipeline.validate_transform_migrate(sensor_data["humidity"])
+        pipeline.validate_apply_intelligence(sensor_data["humidity"])
+        pipeline.validate_transform_migrate(sensor_data["temperature"])
+        pipeline.validate_apply_intelligence(sensor_data["temperature"])
     else:
         s = Subscribe()
         s.subscribe()
