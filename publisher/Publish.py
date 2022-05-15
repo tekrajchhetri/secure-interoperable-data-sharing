@@ -9,7 +9,7 @@ from core.connection_manager import ConnectionManager
 import hashlib
 from datetime import datetime
 import json
-
+from legal.legal_engine import LegalEngine
 
 class Publish(ConnectionManager):
 
@@ -39,9 +39,11 @@ class Publish(ConnectionManager):
         elif type == "result":
             exchange_name = self.get_rabbit_config_details()["result_publish_exchange"]
             topic = self.get_rabbit_config_details()["result_publish_topic"]
-
-        channel = connection.channel()
-        channel.basic_publish(exchange=exchange_name,
-                              routing_key=topic,
-                              body=message)
-        connection.close()
+        if LegalEngine().hasConsent(message):
+            channel = connection.channel()
+            channel.basic_publish(exchange=exchange_name,
+                                  routing_key=topic,
+                                  body=message)
+            connection.close()
+        else:
+            print("No consent")
