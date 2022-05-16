@@ -31,7 +31,8 @@ class Pipeline:
         data = json.loads(data)
         if LegalEngine().hasConsent(data=data):
             mode = Helpers().edge_intelligence_mode()["intelligence_mode"]
-            if (ValidationEngine().validate(data)):
+            validation_result = ValidationEngine().validate(data)
+            if (validation_result["status"]):
                 if mode == "edge":
                     res = EdgeIntelligence().start_edge_intelligence(data, mode)
                     print(res)

@@ -38,7 +38,7 @@ class ValidationEngine(Helpers):
             else:
                 return {"status": False}
         else:
-            return False
+            return {"status": False}
 
 
 
