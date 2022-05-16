@@ -11,6 +11,7 @@ from pyshacl import validate
 from datetime import datetime
 import hashlib
 import textwrap
+from data_transformation.data_transformation_engine import DataTransformationEngine
 class ValidationEngine(Helpers):
     def validate(self, data):
         """ perform validation of the received input data
@@ -27,7 +28,7 @@ class ValidationEngine(Helpers):
             }
         :return: boolean
         """
-        data_graph_v = self.generate_shacl_data_graph(data)
+        data_graph_v = DataTransformationEngine().generate_shacl_data_graph(data)
         if self.validate_data_integrity(data_graph=data_graph_v, data_hash=self.get_hash(data)):
             if "temperature" in data['observedproperty']:
                 shacl_graph_v = SHACLShapes().temperature()
