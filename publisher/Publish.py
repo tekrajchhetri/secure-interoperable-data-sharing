@@ -19,7 +19,7 @@ class Publish(ConnectionManager):
     def format_data(self, sensorobservationvalue, type="temperature"):
         observed_property = f'STI_W201_{type}'
         timeStamp = datetime.now()
-        sensorname = "DTH11"
+        sensorname = "DHT11"
         formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S%f")
         formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S:%f")
         data = {'observedproperty': observed_property,
