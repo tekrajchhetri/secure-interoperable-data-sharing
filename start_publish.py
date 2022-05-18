@@ -8,7 +8,6 @@
 
 from sensor.sensor import Sensor
 
-from publisher.Publish import Publish
 if __name__ == '__main__':
     s = Sensor()
     s.read_sensor_data("fog")
