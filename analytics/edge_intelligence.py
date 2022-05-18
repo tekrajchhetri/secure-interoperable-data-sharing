@@ -7,7 +7,7 @@
 # @Software: PyCharm
 from owlready2 import *
 from analytics.rules import Rules
-from data_transformation.Publish import Publish
+from data_migrator.Publish import Publish
 import json
 class EdgeIntelligence:
     def get_name_space(self):

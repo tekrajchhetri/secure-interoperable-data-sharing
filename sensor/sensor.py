@@ -9,7 +9,7 @@ import Adafruit_DHT
 import yaml
 from yaml.loader import SafeLoader
 import sys
-from data_transformation.Publish import Publish
+from data_migrator.Publish import Publish
 
 class Sensor:
     def read_yml(self, filename):
