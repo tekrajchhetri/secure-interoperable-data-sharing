@@ -14,13 +14,19 @@
 - Create a queue (go to queues tab) with a name *secure_interoperable_data_sharing*  (or based on what you've defined in config.yml)
 - Create exchange of type *topic*, routing key and assign (or bind) it to newly created queue. The name for both routing key and exchange is the same, which is *secure_interoperable_data_sharing*. IF you wish to change, you can do so in *config.yml*.
 
-# KG Instance 
-![Screenshot 2022-05-12 at 14 35 32](https://user-images.githubusercontent.com/52251022/168093950-a1a621cc-a437-456e-a94a-0ae1ccf97b3a.png)
+# KG Instance  
+
+![kg_snapshot](https://user-images.githubusercontent.com/52251022/172155681-1cad2214-b187-4c21-aaf4-b29930b7bff0.png)
 
 
 # Softwares
-- [Docker](https://www.docker.com)
-- [Python 3.X](https://www.python.org)
-- [pySHACL](https://github.com/RDFLib/pySHACL)
-- [rdflib](https://rdflib.readthedocs.io/en/stable/)
-- [Owlready2](https://owlready2.readthedocs.io/en/v0.37/)
+|Libraries|Version|  
+|---|---| 
+|Python |3.8|  
+|RDFLib|6.1.1|  
+|PyYAML|6.0|  
+|pySHACL|0.19.0|
+|Docker|20.x|
+|Pika|1.2.1|
+|Owlready2|0.3|
+|Adafruit-DHT|1.4.0|
