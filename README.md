@@ -1,4 +1,13 @@
-# secure-interoperable-data-sharing
+# SRIICATS: A Semantic-based pRivacy-aware and Intelligence enabling framework for Interoperable, aCcurate, and quAlity ioT data Sharing
+
+```
+@Article{sriicats,
+AUTHOR = {Chhetri, Tek Raj and  Varghese, Blesson and Dehury, Chinmaya Kumar and Fensel, Anna and Srirama, Satish Narayana and DeLong, Rance J.},
+TITLE = {
+SRIICATS: A Semantic-based pRivacy-aware and Intelligence enabling framework for Interoperable, aCcurate, and quAlity ioT data Sharing},
+YEAR = {2022},  
+}
+```
 
 # Instructions
 - First start the RabbitMQ cluster
