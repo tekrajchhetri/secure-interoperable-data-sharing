@@ -1,4 +1,4 @@
-# SRIICATS: A Semantic-based pRivacy-aware and Intelligence enabling framework for Interoperable, aCcurate, and quAlity ioT data Sharing
+# A Semantic-based pRivacy-aware and Intelligence enabling framework for Interoperable, aCcurate, and quAlity ioT data Sharing
 
 ```
 @Article{sriicats,
