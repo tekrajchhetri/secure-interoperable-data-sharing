@@ -33,3 +33,6 @@ Code in support for the publication.
 |Pika|1.2.1|
 |Owlready2|0.3|
 |Adafruit-DHT|1.4.0|
+|py_solc_x|1.1.1|
+|web3|5.31.1|
+ 
