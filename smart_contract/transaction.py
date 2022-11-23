@@ -12,11 +12,11 @@ class Transaction:
 
     def __init__(self) -> None:
         # Test account address
-        self.account_address="0x7327c620466DFc3548BFFe9e3da18b192c79cda"
+        self.account_address="0xe3Fc9C5d3055ceb429F0F161E863151D19d4B2bF"
         # private key for test account
-        self.private_key = "edd37d5c48548279fb39a9845bfa27c6a26ddcc7bd90b5395e5bf9009f6f88"
+        self.private_key = "0xfadd56513d37277a3fe72518f0087fe26053df9f59dc95b97451f9a0a832fa57"
         self.chain_id = 1337
-        self.URL = "http://127.0.0.1:7545"
+        self.URL = "http://138.232.18.143:8545"
 
     def get_contract_address(self):
         with open(f"{os.path.dirname(os.path.realpath(__file__))}/contract_address.json", 'r') as f:
@@ -36,7 +36,8 @@ class Transaction:
         deployed_contract_instance = w3.eth.contract(address=self.get_contract_address(), abi=abi["abi"])
         decoded = deployed_contract_instance.decode_function_input(w3.eth.get_transaction(
             transaction_hash=transactionHash)['input'])
-        return f"DECODED DATA: {decoded} for transaction: {transactionHash}"
+        print (f"DECODED DATA: {list(decoded)[1]['_token']} for transaction: {transactionHash}")
+        return list(decoded)[1]['_token']
 
     def get_transaction_details(self, transactionHash):
         w3 = Web3(Web3.HTTPProvider(self.URL))
