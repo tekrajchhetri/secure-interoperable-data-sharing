@@ -11,6 +11,7 @@ from pyshacl import validate
 from datetime import datetime
 import hashlib
 import textwrap
+from smart_contract.transaction import Transaction
 from data_transformation.data_transformation_engine import DataTransformationEngine
 class ValidationEngine(Helpers):
     def validate(self, data):
@@ -28,7 +29,7 @@ class ValidationEngine(Helpers):
             }
         :return: boolean
         """
-        data_graph_v = DataTransformationEngine().generate_shacl_data_graph(data)
+        data_graph_v = DataTransformationEngine().parse_kg_data_to_turtle(data)
         if self.validate_data_integrity(data_graph=data_graph_v, data_hash=self.get_hash(data)):
             if "temperature" in data['observedproperty']:
                 shacl_graph_v = SHACLShapes().temperature()
@@ -55,9 +56,9 @@ class ValidationEngine(Helpers):
             FILTER EXISTS {{?s sricats:hasHash ?o
                 FILTER (?o = "{0}"^^xsd:string)}}
             }}""").format(data_hash)
+        print(data_graph)
         qres = data_graph.query(query)
         return bool(list(qres)[0])
 
-    def get_hash(self, data):
-        extractTimeStamp = datetime.strptime(data["resultobservationtime"], '%Y-%m-%dT%H:%M:%S:%f')
-        return hashlib.sha256(bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S%f")) + data["observationresult"]), 'utf-8')).hexdigest()
+    def get_hash(self, blockchainHash):
+        return Transaction().decode_data(blockchainHash)

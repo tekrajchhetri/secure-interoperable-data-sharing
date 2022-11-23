@@ -8,7 +8,6 @@
 import sys
 from rdflib import Graph, Literal, XSD, RDF,URIRef
 from rdflib import Namespace
-from rdflib import Graph, URIRef, Literal
 from rdflib.serializer import Serializer
 from smart_contract.transaction import Transaction
 class DataTransformationEngine:
@@ -34,7 +33,13 @@ class DataTransformationEngine:
         elif "humidity" in data['observedproperty']:
             g.add((obs, OM['hasUnit'], OM["percent"]))
         g.add((obs, SRICATS['hasHash'], Literal(data['hashvalue'], datatype=XSD.string)))
-        return g
+        g.add((obs, SRICATS['hasBlockChainHash'], Literal(data['blockchainhashvalue'], datatype=XSD.string)))
+        context = {"sricats": "http://www.tekrajchhetri.com/sricats/",
+                   "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+                   "sosa": "http://www.w3.org/ns/sosa/",
+                   "xsd": "http://www.w3.org/2001/XMLSchema#"
+                   }
+        return g.serialize(format="json-ld", context=context)
 
     def parse_kg_data_to_turtle(self, rdf_data):
         return Graph().parse(data=rdf_data, format='json-ld').serialize(format="turtle")

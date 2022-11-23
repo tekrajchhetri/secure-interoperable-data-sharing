@@ -9,6 +9,8 @@ from core.connection_manager import ConnectionManager
 import hashlib
 from datetime import datetime
 import json
+from data_transformation.data_transformation_engine import DataTransformationEngine
+from smart_contract.transaction import Transaction
 from legal.legal_engine import LegalEngine
 
 class Publish(ConnectionManager):
@@ -22,14 +24,17 @@ class Publish(ConnectionManager):
         sensorname = "DHT11"
         formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S%f")
         formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S:%f")
+        hashValue = self.generate_hash(formattedTimeStampObservation, sensorobservationvalue)
+        blockchainHash = Transaction().create_transaction(hashValue)
         data = {'observedproperty': observed_property,
                 'observationsensorid': sensorname,
                 'observationresult': sensorobservationvalue,
                 'resultobservationtime': f"{formattedTimeStampDT}",
                 'observationid': f'{sensorname}_{formattedTimeStampObservation}',
-                'hashvalue': self.generate_hash(formattedTimeStampObservation, sensorobservationvalue)
+                'hashvalue': hashValue,
+                'blockchainhashvalue':blockchainHash
                 }
-        return json.dumps(data)
+        return json.dumps(DataTransformationEngine().generate_shacl_data_graph(data))
 
     def publish(self, message, type):
         connection = self.rabbit_connection()
