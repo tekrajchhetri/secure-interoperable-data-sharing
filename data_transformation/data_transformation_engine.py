@@ -8,7 +8,9 @@
 import sys
 from rdflib import Graph, Literal, XSD, RDF,URIRef
 from rdflib import Namespace
-
+from rdflib import Graph, URIRef, Literal
+from rdflib.serializer import Serializer
+from smart_contract.transaction import Transaction
 class DataTransformationEngine:
     def generate_shacl_data_graph(self, data):
         SRICATS = Namespace("http://www.tekrajchhetri.com/sricats/")
@@ -34,9 +36,15 @@ class DataTransformationEngine:
         g.add((obs, SRICATS['hasHash'], Literal(data['hashvalue'], datatype=XSD.string)))
         return g
 
+    def parse_kg_data_to_turtle(self, rdf_data):
+        return Graph().parse(data=rdf_data, format='json-ld').serialize(format="turtle")
+
     def transform(self, rdf_data):
         transformed_data = ""
         for subject, predicate, obj in rdf_data:
             transformed_data = transformed_data + subject.n3() + " " + predicate.n3() + " " + obj.n3() + " . \n"
+            print(transformed_data)
 
         return transformed_data
+
+
