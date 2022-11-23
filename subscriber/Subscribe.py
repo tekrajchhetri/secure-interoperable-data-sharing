@@ -16,6 +16,9 @@ class Subscribe(ConnectionManager):
     def fog_result_callback(self, ch, method, properties, body):
         """This is where you'd implement call to control action based on fog results
         """
+        print("##########################################################################################")
+        print(f"######################    Fog  Result  callback for future         #####################")
+        print("##########################################################################################")
         print(body)
 
     def subscribe(self):

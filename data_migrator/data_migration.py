@@ -20,6 +20,9 @@ class DataMigration:
         sparql.setReturnFormat('json')
         result = sparql.query()
         if str(result.response.read().decode("utf-8")) == "":
+            print("##########################################################################################")
+            print(f"######################   Migration to GDB --  Success               #####################")
+            print("##########################################################################################")
             return "SUCCESS"
         return "FAIL"
 

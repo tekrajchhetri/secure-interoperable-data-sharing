@@ -8,7 +8,10 @@
 from owlready2 import *
 from analytics.rules import Rules
 from data_migrator.Publish import Publish
+from validation.validation_engine import ValidationEngine
+from data_transformation.data_transformation_engine import DataTransformationEngine
 import json
+import textwrap
 class EdgeIntelligence:
     def get_name_space(self):
         onto_sensor = get_ontology("http://www.tekrajchhetri.com/sricats")
@@ -42,6 +45,7 @@ class EdgeIntelligence:
         else:
             return {key:"None"}
 
+
     def start_edge_intelligence(self, data, mode):
         """ Starts the analytics
         :param data: Published Sensor data
@@ -50,20 +54,35 @@ class EdgeIntelligence:
         :fog - publishes the result to a topic defined in config file
         :return: dict
         """
-        if "temperature" in data['observedproperty']:
+        data = DataTransformationEngine().parse_kg_data_to_turtle(data)
+        print("##########################################################################################")
+        print(f"######################            DEBUG  EDGE INT                   #####################")
+        print(f"######################            {data, type(data)}                #####################")
+        print("##########################################################################################")
+        print(ValidationEngine().get_data_val(data,"sosa:hasSimpleResult"))
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        if "temperature" in ValidationEngine().get_type(data).lower():
             rtype = "temperature"
 
-        if "humidity" in data['observedproperty']:
+        if "humidity" in ValidationEngine().get_type(data).lower():
             rtype="humidity"
         if mode=="edge":
             # for resource constraint devices
             owlready2.reasoning.JAVA_MEMORY=1000
-        result = self.reasoning(value=data["observationresult"],rtype=rtype)
-        result["observationsensorid"] = data["observationsensorid"]
-        result["observedproperty"] = data["observedproperty"]
-        result["observationid"] = data["observationid"]
+        result = self.reasoning(value=float(ValidationEngine().get_data_val(data, "sosa:hasSimpleResult")),rtype=rtype)
+        print("##########################################################################################")
+        print(f"######################            RESULT                          #####################")
+        print(f"######################            {result}                          #####################")
+        print("##########################################################################################")
+
+        result["observationsensorid"] = ValidationEngine().get_observationid_and_sensor(data, "s")
+        result["observedproperty"] = ValidationEngine().get_data_val(data,"sosa:observedproperty")
+        result["observationid"] = ValidationEngine().get_observationid_and_sensor(data, "o")
         if mode == "edge":
             return result
         else:
+            print("##########################################################################################")
+            print(f"######################  Preparing to publish Fog Analytics Result   #####################")
+            print("##########################################################################################")
             Publish().publish(message=json.dumps(result), type="result")
 

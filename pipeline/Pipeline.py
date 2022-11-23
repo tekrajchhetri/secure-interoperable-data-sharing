@@ -20,7 +20,11 @@ class Pipeline:
         if LegalEngine().hasConsent(data=data):
             validation_result = ValidationEngine().validate(data)
             if(validation_result["status"]):
-                transformed_data = DataTransformationEngine().transform(rdf_data=validation_result["rdf_turtle_data"])
+                transformed_data = DataTransformationEngine().transform(rdf_data=
+                                                                        ValidationEngine().turtle_str_to_rdf_graph(
+                                                                            validation_result["rdf_turtle_data"]
+                                                                        )
+                                                                        )
                 status = DataMigration().migrate_to_gdb(transformed_data)
                 print(status)
                 return status 

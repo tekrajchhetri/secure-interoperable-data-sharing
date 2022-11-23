@@ -48,6 +48,9 @@ class DataTransformationEngine:
         transformed_data = ""
         for subject, predicate, obj in rdf_data:
             transformed_data = transformed_data + subject.n3() + " " + predicate.n3() + " " + obj.n3() + " . \n"
+            print("##########################################################################################")
+            print(f"######################  DATA for Migration                          #####################")
+            print("##########################################################################################")
             print(transformed_data)
 
         return transformed_data

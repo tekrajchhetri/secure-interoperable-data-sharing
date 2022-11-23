@@ -42,9 +42,15 @@ class Publish(ConnectionManager):
             exchange_name = self.get_rabbit_config_details()["data_publish_exchange"]
             topic = self.get_rabbit_config_details()["data_publish_topic"]
         elif type == "result":
+            print("##########################################################################################")
+            print(f"######################   Publishing Fog Analytics Result            #####################")
+            print("##########################################################################################")
             exchange_name = self.get_rabbit_config_details()["result_publish_exchange"]
             topic = self.get_rabbit_config_details()["result_publish_topic"]
         if LegalEngine().hasConsent(message):
+            print("##########################################################################################")
+            print(f"######################   Checking Consent                           #####################")
+            print("##########################################################################################")
             channel = connection.channel()
             channel.basic_publish(exchange=exchange_name,
                                   routing_key=topic,

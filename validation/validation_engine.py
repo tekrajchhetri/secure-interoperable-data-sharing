@@ -10,6 +10,7 @@ from validation.shacl_shapes import SHACLShapes
 from pyshacl import validate
 from datetime import datetime
 import hashlib
+from rdflib import Graph
 import textwrap
 from smart_contract.transaction import Transaction
 from data_transformation.data_transformation_engine import DataTransformationEngine
@@ -30,10 +31,13 @@ class ValidationEngine(Helpers):
         :return: boolean
         """
         data_graph_v = DataTransformationEngine().parse_kg_data_to_turtle(data)
-        if self.validate_data_integrity(data_graph=data_graph_v, data_hash=self.get_hash(data)):
-            if "temperature" in data['observedproperty']:
+        if self.validate_data_integrity(data_graph=data_graph_v, data_hash=self.get_hash(data_graph_v)):
+            print("##########################################################################################")
+            print("######################  Integrity Verified, Proceeding to Next steps #####################")
+            print("##########################################################################################")
+            if "temperature" in self.get_type(data_graph_v).lower():
                 shacl_graph_v = SHACLShapes().temperature()
-            elif "humidity" in data['observedproperty']:
+            elif "humidity" in self.get_type(data_graph_v).lower():
                 shacl_graph_v = SHACLShapes().relative_humidity()
             if self.validate_data_quality(data_graph_v=data_graph_v, shacl_graph_v=shacl_graph_v):
                 return {"status":True, "rdf_turtle_data":data_graph_v}
@@ -42,23 +46,85 @@ class ValidationEngine(Helpers):
         else:
             return {"status": False}
 
-
+    def turtle_str_to_rdf_graph(self, tutle_data_str):
+        return Graph().parse(data=tutle_data_str)
 
     def validate_data_quality(self, data_graph_v, shacl_graph_v):
-        data_graph_v = data_graph_v.serialize(format="turtle")
+        data_graph_v = data_graph_v
         conforms, report, message = validate(data_graph=data_graph_v, shacl_graph=shacl_graph_v, advanced=True, debug=False)
         return conforms
 
     def validate_data_integrity(self, data_graph, data_hash):
-        query = textwrap.dedent("""
+        g = Graph().parse(data=data_graph)
+        queryr = textwrap.dedent("""
               ASK {{
             ?s a sosa:Observation.
             FILTER EXISTS {{?s sricats:hasHash ?o
                 FILTER (?o = "{0}"^^xsd:string)}}
             }}""").format(data_hash)
-        print(data_graph)
-        qres = data_graph.query(query)
+        qres = g.query(queryr)
         return bool(list(qres)[0])
 
-    def get_hash(self, blockchainHash):
-        return Transaction().decode_data(blockchainHash)
+    def get_type(self, data_graph):
+        g = Graph().parse(data=data_graph)
+        # print("$$$$$$$$$$$$$$-------$$$$$$$$$$$$$$")
+        # print(data_graph, type(data_graph))
+        # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        queryr = textwrap.dedent("""
+                SELECT  ?o WHERE {{
+                ?s a sosa:Observation;
+                   sosa:observedProperty ?o.
+            }}""")
+        qres = g.query(queryr)
+        for row in qres:
+            return  row.o
+
+    def get_blockchainHashInformation(self, data_graph):
+        g = Graph().parse(data=data_graph)
+        # print("$$$$$$$$$$$$$$-------$$$$$$$$$$$$$$")
+        # print(data_graph, type(data_graph))
+        # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        queryr = textwrap.dedent("""
+                SELECT  ?o WHERE {{
+                ?s a sosa:Observation;
+                   sricats:hasBlockChainHash ?o.
+            }}""")
+        qres = g.query(queryr)
+        print(list(qres))
+
+        for row in qres:
+            return  row.o
+
+    def get_data_val(self, data_graph, objectProperty):
+        g = Graph().parse(data=data_graph)
+        # print("$$$$$$$$$$$$$$-------$$$$$$$$$$$$$$")
+        # print(data_graph, type(data_graph))
+        # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        queryr = textwrap.dedent("""
+                SELECT  ?o WHERE {{
+                ?s a sosa:Observation;
+                   {0} ?o.
+            }}""").format(objectProperty)
+        qres = g.query(queryr)
+        for row in qres:
+            return  row.o
+
+    def get_observationid_and_sensor(self, data_graph, returnSorO):
+        g = Graph().parse(data=data_graph)
+        queryr = textwrap.dedent("""
+                SELECT  ?{0} WHERE {{
+                ?s a sosa:Sensor;
+                   sosa:observes ?o.
+            }}""").format(returnSorO)
+        qres = g.query(queryr)
+        print(queryr, qres)
+        for row in qres:
+            return  row.o if returnSorO == "o" else row.s
+
+    def get_hash(self, data_graph):
+        blockchainHash = self.get_blockchainHashInformation(data_graph)
+
+        if blockchainHash is None:
+            return None
+        else:
+            return Transaction().decode_data(blockchainHash)
