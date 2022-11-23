@@ -19,7 +19,8 @@ Code in support for the publication.
 
 # KG Instance  
 
-![kg_snapshot](https://user-images.githubusercontent.com/52251022/172155681-1cad2214-b187-4c21-aaf4-b29930b7bff0.png)
+![image](https://user-images.githubusercontent.com/52251022/203595432-ea343074-5d95-48e4-a90a-8009c9c501b2.png)
+
 
 
 # Softwares
