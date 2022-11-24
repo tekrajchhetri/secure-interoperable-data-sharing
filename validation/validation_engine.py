@@ -67,9 +67,6 @@ class ValidationEngine(Helpers):
 
     def get_type(self, data_graph):
         g = Graph().parse(data=data_graph)
-        # print("$$$$$$$$$$$$$$-------$$$$$$$$$$$$$$")
-        # print(data_graph, type(data_graph))
-        # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         queryr = textwrap.dedent("""
                 SELECT  ?o WHERE {{
                 ?s a sosa:Observation;
@@ -81,9 +78,6 @@ class ValidationEngine(Helpers):
 
     def get_blockchainHashInformation(self, data_graph):
         g = Graph().parse(data=data_graph)
-        # print("$$$$$$$$$$$$$$-------$$$$$$$$$$$$$$")
-        # print(data_graph, type(data_graph))
-        # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         queryr = textwrap.dedent("""
                 SELECT  ?o WHERE {{
                 ?s a sosa:Observation;
@@ -97,9 +91,6 @@ class ValidationEngine(Helpers):
 
     def get_data_val(self, data_graph, objectProperty):
         g = Graph().parse(data=data_graph)
-        # print("$$$$$$$$$$$$$$-------$$$$$$$$$$$$$$")
-        # print(data_graph, type(data_graph))
-        # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         queryr = textwrap.dedent("""
                 SELECT  ?o WHERE {{
                 ?s a sosa:Observation;
