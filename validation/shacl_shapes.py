@@ -51,11 +51,10 @@ class SHACLShapes:
 
                             sh:property
                             [
-                                sh:path :hasHash; 
+                                sh:path :hasBlockChainHash; 
                                     sh:minCount 1;
                                     sh:maxCount 1; 
-                                    sh:minLength 64 ;
-                                    sh:maxLength 64 ;
+                                    sh:minLength 60 ; 
                                     sh:datatype  xsd:string;
                             ];
 
@@ -116,7 +115,7 @@ class SHACLShapes:
             @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
             <observation/DS18B20_2022051010211961971> a sosa:Observation ;
-                    :hasHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
+                    :hasBlockChainHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
                     om:hasUnit om:percent;
                     sosa:resultTime "2005-02-28T00:00:00"^^xsd:dateTime;
                     sosa:hasSimpleResult "45.3"^^xsd:double ;
@@ -149,11 +148,10 @@ class SHACLShapes:
 
                             sh:property
                             [
-                                sh:path :hasHash; 
+                                sh:path :hasBlockChainHash; 
                                     sh:minCount 1;
                                     sh:maxCount 1; 
-                                    sh:minLength 64 ;
-                                    sh:maxLength 64 ;
+                                    sh:minLength 60 ; 
                                     sh:datatype  xsd:string;
                             ];
                             
