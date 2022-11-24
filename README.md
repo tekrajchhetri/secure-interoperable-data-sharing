@@ -19,7 +19,7 @@ Code in support for the publication.
 
 # KG Instance  
 
-![image](https://user-images.githubusercontent.com/52251022/203595432-ea343074-5d95-48e4-a90a-8009c9c501b2.png)
+![image](https://user-images.githubusercontent.com/52251022/203851228-0783954d-834a-456a-86ef-36bd770ffcd8.png)
 
 
 
