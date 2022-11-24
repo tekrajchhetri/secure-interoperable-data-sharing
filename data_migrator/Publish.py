@@ -16,7 +16,7 @@ from legal.legal_engine import LegalEngine
 class Publish(ConnectionManager):
 
     def generate_hash(self, noise_timestamp, value):
-        return hashlib.sha256(bytes(str(int(noise_timestamp) + round(float(value)), 3), 'utf-8')).hexdigest()
+        return hashlib.sha256(bytes(str(int(noise_timestamp) + round(float(value), 3)), 'utf-8')).hexdigest()
 
     def format_data(self, sensorobservationvalue, type="temperature"):
         observed_property = f'STI_W201_{type}'
