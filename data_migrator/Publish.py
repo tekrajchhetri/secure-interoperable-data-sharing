@@ -16,14 +16,14 @@ from legal.legal_engine import LegalEngine
 class Publish(ConnectionManager):
 
     def generate_hash(self, noise_timestamp, value):
-        return hashlib.sha256(bytes(str(int(noise_timestamp) + value), 'utf-8')).hexdigest()
+        return hashlib.sha256(bytes(str(int(noise_timestamp) + round(float(value)), 3), 'utf-8')).hexdigest()
 
     def format_data(self, sensorobservationvalue, type="temperature"):
         observed_property = f'STI_W201_{type}'
         timeStamp = datetime.now()
         sensorname = "DHT11"
-        formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S%f")
-        formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S:%f")
+        formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S")
+        formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S")
         hashValue = self.generate_hash(formattedTimeStampObservation, sensorobservationvalue)
         blockchainHash = Transaction().create_transaction(hashValue)
         data = {'observedproperty': observed_property,
@@ -31,7 +31,6 @@ class Publish(ConnectionManager):
                 'observationresult': sensorobservationvalue,
                 'resultobservationtime': f"{formattedTimeStampDT}",
                 'observationid': f'{sensorname}_{formattedTimeStampObservation}',
-                'hashvalue': hashValue,
                 'blockchainhashvalue':blockchainHash
                 }
         return json.dumps(DataTransformationEngine().generate_shacl_data_graph(data))

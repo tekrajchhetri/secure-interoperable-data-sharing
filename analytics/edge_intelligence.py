@@ -66,9 +66,10 @@ class EdgeIntelligence:
 
         if "humidity" in ValidationEngine().get_type(data).lower():
             rtype="humidity"
-        if mode=="edge":
+        if mode=="fog":
             # for resource constraint devices
-            owlready2.reasoning.JAVA_MEMORY=1000
+            owlready2.reasoning.JAVA_MEMORY=4800
+
         result = self.reasoning(value=float(ValidationEngine().get_data_val(data, "sosa:hasSimpleResult")),rtype=rtype)
         print("##########################################################################################")
         print(f"######################            RESULT                          #####################")

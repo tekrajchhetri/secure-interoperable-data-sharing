@@ -55,7 +55,6 @@ class DataTransformationEngine:
                         "@value": "2022-11-24T09:25:18"
                       },
                       "sricats:hasBlockChainHash": "0x00e23a616470fc2004c33a0fd8fd444c3914d5244cfb0cbdd7a73723b3320188",
-                      "sricats:hasHash": "7a2615a501c47bb0d0a27cafeebce02141f54232c141cb009ee70e5150226596"
                     }
                   ]
                 }
@@ -80,7 +79,6 @@ class DataTransformationEngine:
             g.add((obs, OM['hasUnit'], OM["degreeCelsius"]))
         elif "humidity" in data['observedproperty']:
             g.add((obs, OM['hasUnit'], OM["percent"]))
-        g.add((obs, SRICATS['hasHash'], Literal(data['hashvalue'], datatype=XSD.string)))
         g.add((obs, SRICATS['hasBlockChainHash'], Literal(data['blockchainhashvalue'], datatype=XSD.string)))
         context = {"sricats": "http://www.tekrajchhetri.com/sricats/",
                    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",

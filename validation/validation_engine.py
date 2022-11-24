@@ -25,13 +25,14 @@ class ValidationEngine(Helpers):
             'observationsensorid': 'DS18B20',
             'observationresult': 88.6,
             'resultobservationtime': "2005-02-28T00:00:00",
-            'observationid': f'DS18B20_DS18B20_asfasdf',
-            'hashvalue': "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42"
+            'observationid': 'DS18B20_DS18B20_asfasdf',
+            'hasBlockChainHash': "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42"
             }
         :return: boolean
         """
         data_graph_v = DataTransformationEngine().parse_kg_data_to_turtle(data)
-        if self.validate_data_integrity(data_graph=data_graph_v, data_hash=self.get_hash(data_graph_v)):
+        if self.validate_data_integrity(reconstructed_data_hash=self.reconstruct_hash_from_data(data_graph_v),
+                                        blockchainHash=self.get_hash(data_graph_v)):
             print("##########################################################################################")
             print("######################  Integrity Verified, Proceeding to Next steps #####################")
             print("##########################################################################################")
@@ -54,16 +55,10 @@ class ValidationEngine(Helpers):
         conforms, report, message = validate(data_graph=data_graph_v, shacl_graph=shacl_graph_v, advanced=True, debug=False)
         return conforms
 
-    def validate_data_integrity(self, data_graph, data_hash):
-        g = Graph().parse(data=data_graph)
-        queryr = textwrap.dedent("""
-              ASK {{
-            ?s a sosa:Observation.
-            FILTER EXISTS {{?s sricats:hasHash ?o
-                FILTER (?o = "{0}"^^xsd:string)}}
-            }}""").format(data_hash)
-        qres = g.query(queryr)
-        return bool(list(qres)[0])
+
+    def validate_data_integrity(self,  reconstructed_data_hash, blockchainHash):
+            return reconstructed_data_hash==blockchainHash
+
 
     def get_type(self, data_graph):
         g = Graph().parse(data=data_graph)
@@ -119,3 +114,10 @@ class ValidationEngine(Helpers):
             return None
         else:
             return Transaction().decode_data(blockchainHash)
+
+    def reconstruct_hash_from_data(self, data_graph):
+        print(self.get_data_val(data_graph, "sosa:resultTime"))
+        extractTimeStamp = datetime.strptime(str(self.get_data_val(data_graph, "sosa:resultTime")), '%Y-%m-%dT%H:%M:%S')
+        return hashlib.sha256(
+            bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S")) + round(float(self.get_data_val(data_graph, "sosa:hasSimpleResult")), 3)),
+                  'utf-8')).hexdigest()
