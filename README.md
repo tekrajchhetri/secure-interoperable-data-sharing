@@ -34,7 +34,7 @@ Code in support for the publication.
 - ganache_1  | (9) 0x8d8C2916D380b1327eE1b05F63e9D388D9231fA7 (100 ETH)
 - ganache_1  |
 
-#### ganache_1  | Private Keys
+## Private Keys
 - ganache_1  | ==================
 - ganache_1  | (0) 0xfadd56513d37277a3fe72518f0087fe26053df9f59dc95b97451f9a0a832fa57
 - ganache_1  | (1) 0x1123e0c9c6df300c0cbdf61cbdca918716ca5e68fd306193aa61b345176d53d8
