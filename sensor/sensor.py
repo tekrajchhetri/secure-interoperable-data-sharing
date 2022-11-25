@@ -10,7 +10,7 @@ import yaml
 from yaml.loader import SafeLoader
 import sys
 from data_migrator.Publish import Publish
-
+from legal.legal_engine import LegalEngine
 class Sensor:
     def read_yml(self, filename):
         # Open the file and load the file
@@ -23,23 +23,30 @@ class Sensor:
 
 
     def read_sensor_data(self, mode):
-        publishmsg = Publish()
-        sensor_config = self.read_yml("sensor/sensor_config.yml")
-        if mode=="edge":
-            humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
-                                                            sensor_config["sensor"][1]["gpio_pin"][0])
-            message_temp = publishmsg.format_data(temperature)
-            message_humidity = publishmsg.format_data(humidity, "humidity")
-            # if we want to run on the edge device, there's no need to publish data to mesaging server
-            # we can directly performing all the tasks and send the Kg to GraphDB
-            return {"temperature": message_temp, "humidity":message_humidity}
-        else:
-            while True:
+        if LegalEngine().hasConsent(data="what-are-you-requestingconsent-for"):
+            """ In this consent check, we pass initial consent request information. 
+                For this research we've used simulated one, so we don't pass anything
+            """
+            publishmsg = Publish()
+
+            sensor_config = self.read_yml("sensor/sensor_config.yml")
+            if mode=="edge":
                 humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
-                            sensor_config["sensor"][1]["gpio_pin"][0])
+                                                                sensor_config["sensor"][1]["gpio_pin"][0])
                 message_temp = publishmsg.format_data(temperature)
                 message_humidity = publishmsg.format_data(humidity, "humidity")
-                sys.stdout.write("Sending activitySensor data to Messaging Server")
-                publishmsg.publish(message_temp, "data")
-                publishmsg.publish(message_humidity, "data")
-                sys.stdout.write("Send completed")
+                # if we want to run on the edge device, there's no need to publish data to mesaging server
+                # we can directly performing all the tasks and send the Kg to GraphDB
+                return {"temperature": message_temp, "humidity":message_humidity}
+            else:
+                while True:
+                    humidity, temperature = Adafruit_DHT.read_retry(eval(sensor_config["sensor"][0]["name"][0]),
+                                sensor_config["sensor"][1]["gpio_pin"][0])
+                    message_temp = publishmsg.format_data(temperature)
+                    message_humidity = publishmsg.format_data(humidity, "humidity")
+                    sys.stdout.write("Sending activitySensor data to Messaging Server")
+                    publishmsg.publish(message_temp, "data")
+                    publishmsg.publish(message_humidity, "data")
+                    sys.stdout.write("Send completed")
+        else:
+            print(f"{'message': 'Unable to process due to a lack of consent for the requested operation.'}")
