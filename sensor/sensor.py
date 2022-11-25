@@ -49,4 +49,4 @@ class Sensor:
                     publishmsg.publish(message_humidity, "data")
                     sys.stdout.write("Send completed")
         else:
-            print(f"{'message': 'Unable to process due to a lack of consent for the requested operation.'}")
+            print({'message': 'No consent so stopping the operations. Exiting.'})
