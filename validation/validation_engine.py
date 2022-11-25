@@ -119,5 +119,5 @@ class ValidationEngine(Helpers):
         print(self.get_data_val(data_graph, "sosa:resultTime"))
         extractTimeStamp = datetime.strptime(str(self.get_data_val(data_graph, "sosa:resultTime")), '%Y-%m-%dT%H:%M:%S')
         return hashlib.sha256(
-            bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S")) + round(float(self.get_data_val(data_graph, "sosa:hasSimpleResult")), 3)),
+            bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S")) + float(self.get_data_val(data_graph, "sosa:hasSimpleResult"))),
                   'utf-8')).hexdigest()
