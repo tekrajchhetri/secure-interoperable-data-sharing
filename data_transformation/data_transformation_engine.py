@@ -18,46 +18,50 @@ class DataTransformationEngine:
             Example Input:
                 {'observedproperty': 'STI_W201_temperature', 'observationsensorid': 'DHT11', 'observationresult': 22.0,
                 'resultobservationtime': '2022-11-24T09:54:19:782843', 'observationid': 'DHT11_202211245419782843',
-                'hashvalue': '064389e8141c76cdffbc9f3424b65a9562c7efaf96c3f97f0a929928feb3328c',
+                trustabilityscore:0.8,
                 'blockchainhashvalue': '0x510068715be38aa9e7ad5e600748644f858ae908f1be51adc5e24c81aa862bcc'}
         :return: Trnasformed Knowledge Graph in JSONLD representation
             Example Output:
-                {
-                  "@context": {
-                    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
-                    "sosa": "http://www.w3.org/ns/sosa/",
-                    "sricats": "http://www.tekrajchhetri.com/sricats/",
-                    "xsd": "http://www.w3.org/2001/XMLSchema#"
-                  },
-                  "@graph": [
-                    {
-                      "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11",
-                      "@type": "sosa:Sensor",
-                      "sosa:observes": {
-                        "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242518407674"
-                      }
-                    },
-                    {
-                      "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242518407674",
-                      "@type": "sosa:Observation",
-                      "om:hasUnit": {
-                        "@id": "om:percent"
-                      },
-                      "sosa:hasSimpleResult": 33.0,
-                      "sosa:madeBySensor": {
-                        "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11"
-                      },
-                      "sosa:observedProperty": {
-                        "@id": "http://www.w3.org/ns/sosa/observedProperty/STI_W201_humidity"
-                      },
-                      "sosa:resultTime": {
-                        "@type": "xsd:dateTime",
-                        "@value": "2022-11-24T09:25:18"
-                      },
-                      "sricats:hasBlockChainHash": "0x00e23a616470fc2004c33a0fd8fd444c3914d5244cfb0cbdd7a73723b3320188",
-                    }
-                  ]
-                }
+                  {
+                                  "@context": {
+                                    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+                                    "sosa": "http://www.w3.org/ns/sosa/",
+                                    "sricats": "http://www.tekrajchhetri.com/sricats/",
+                                    "xsd": "http://www.w3.org/2001/XMLSchema#"
+                                  },
+                                  "@graph": [
+                                    {
+                                      "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11",
+                                      "@type": "sosa:Sensor",
+                                      "sosa:observes": {
+                                        "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202212025703"
+                                      }
+                                    },
+                                    {
+                                      "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202212025703",
+                                      "@type": "sosa:Observation",
+                                      "om:hasUnit": {
+                                        "@id": "om:percent"
+                                      },
+                                      "sosa:hasSimpleResult": 28.0,
+                                      "sosa:madeBySensor": {
+                                        "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11"
+                                      },
+                                      "sosa:observedProperty": {
+                                        "@id": "http://www.w3.org/ns/sosa/observedProperty/STI_W201_humidity"
+                                      },
+                                      "sosa:resultTime": {
+                                        "@type": "xsd:dateTime",
+                                        "@value": "2022-12-02T20:57:03"
+                                      },
+                                      "sricats:hasBlockChainHash": "0xcbb35fbc905aa6aeceaeebec596bc76937d6a0cd1e04ff3aa970adc13899b076",
+                                      "sricats:hasTrustabilityScore": {
+                                        "@type": "xsd:float",
+                                        "@value": "0.8"
+                                      }
+                                    }
+                                  ]
+                                }
         """
         SRICATS = Namespace("http://www.tekrajchhetri.com/sricats/")
         SOSA = Namespace("http://www.w3.org/ns/sosa/")
@@ -92,43 +96,46 @@ class DataTransformationEngine:
         """:Convert JSONLD to Turtle
             :inputs: JSONLD
                Example Input:
-                    {
-                      "@context": {
-                        "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
-                        "sosa": "http://www.w3.org/ns/sosa/",
-                        "sricats": "http://www.tekrajchhetri.com/sricats/",
-                        "xsd": "http://www.w3.org/2001/XMLSchema#"
-                      },
-                      "@graph": [
-                        {
-                          "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11",
-                          "@type": "sosa:Sensor",
-                          "sosa:observes": {
-                            "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242518407674"
-                          }
-                        },
-                        {
-                          "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242518407674",
-                          "@type": "sosa:Observation",
-                          "om:hasUnit": {
-                            "@id": "om:percent"
-                          },
-                          "sosa:hasSimpleResult": 33.0,
-                          "sosa:madeBySensor": {
-                            "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11"
-                          },
-                          "sosa:observedProperty": {
-                            "@id": "http://www.w3.org/ns/sosa/observedProperty/STI_W201_humidity"
-                          },
-                          "sosa:resultTime": {
-                            "@type": "xsd:dateTime",
-                            "@value": "2022-11-24T09:25:18"
-                          },
-                          "sricats:hasBlockChainHash": "0x00e23a616470fc2004c33a0fd8fd444c3914d5244cfb0cbdd7a73723b3320188",
-                          "sricats:hasHash": "7a2615a501c47bb0d0a27cafeebce02141f54232c141cb009ee70e5150226596"
-                        }
-                      ]
-                    }
+                  {
+                                  "@context": {
+                                    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+                                    "sosa": "http://www.w3.org/ns/sosa/",
+                                    "sricats": "http://www.tekrajchhetri.com/sricats/",
+                                    "xsd": "http://www.w3.org/2001/XMLSchema#"
+                                  },
+                                  "@graph": [
+                                    {
+                                      "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11",
+                                      "@type": "sosa:Sensor",
+                                      "sosa:observes": {
+                                        "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202212025703"
+                                      }
+                                    },
+                                    {
+                                      "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202212025703",
+                                      "@type": "sosa:Observation",
+                                      "om:hasUnit": {
+                                        "@id": "om:percent"
+                                      },
+                                      "sosa:hasSimpleResult": 28.0,
+                                      "sosa:madeBySensor": {
+                                        "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11"
+                                      },
+                                      "sosa:observedProperty": {
+                                        "@id": "http://www.w3.org/ns/sosa/observedProperty/STI_W201_humidity"
+                                      },
+                                      "sosa:resultTime": {
+                                        "@type": "xsd:dateTime",
+                                        "@value": "2022-12-02T20:57:03"
+                                      },
+                                      "sricats:hasBlockChainHash": "0xcbb35fbc905aa6aeceaeebec596bc76937d6a0cd1e04ff3aa970adc13899b076",
+                                      "sricats:hasTrustabilityScore": {
+                                        "@type": "xsd:float",
+                                        "@value": "0.8"
+                                      }
+                                    }
+                                  ]
+                                }
             :return: Knowledge graph representation in Turtle format.
                 Example Output:
                     @prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
@@ -136,17 +143,17 @@ class DataTransformationEngine:
                     @prefix sricats: <http://www.tekrajchhetri.com/sricats/> .
                     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-                    <http://www.w3.org/ns/sosa/Observation/DHT11_202211240149872310> a sosa:Observation ;
-                        om:hasUnit om:percent ;
-                        sricats:hasBlockChainHash "0x359703b4d004537f35a602a76f3d59a77914481e0ee9bdbcdf02f716bc924ba4" ;
-                        sricats:hasHash "65bd3244dea6e8db19e19827859a8bc14d6668a01337dcdba9a108ef7541e2ff" ;
-                        sosa:hasSimpleResult 3.2e+01 ;
-                        sosa:madeBySensor <http://www.w3.org/ns/sosa/Sensor/DHT11> ;
-                        sosa:observedProperty <http://www.w3.org/ns/sosa/observedProperty/STI_W201_humidity> ;
-                        sosa:resultTime "2022-11-24T10:01:49"^^xsd:dateTime .
+                <http://www.w3.org/ns/sosa/Observation/DHT11_202212020001> a sosa:Observation ;
+                    om:hasUnit om:percent ;
+                    sricats:hasBlockChainHash "0x3cd7e0ed2cddb2302ec872c818c938f37cbba882eba23fe28ab54f6cd2d77e2c" ;
+                    sricats:hasTrustabilityScore "0.8"^^xsd:float ;
+                    sosa:hasSimpleResult 2.2e+01 ;
+                    sosa:madeBySensor <http://www.w3.org/ns/sosa/Sensor/DHT11> ;
+                    sosa:observedProperty <http://www.w3.org/ns/sosa/observedProperty/STI_W201_temperature> ;
+                    sosa:resultTime "2022-12-02T21:00:01"^^xsd:dateTime .
 
-                    <http://www.w3.org/ns/sosa/Sensor/DHT11> a sosa:Sensor ;
-                        sosa:observes <http://www.w3.org/ns/sosa/Observation/DHT11_202211240149872310> .
+                <http://www.w3.org/ns/sosa/Sensor/DHT11> a sosa:Sensor ;
+                    sosa:observes <http://www.w3.org/ns/sosa/Observation/DHT11_202212020001> .
 
         """
         return Graph().parse(data=rdf_data, format='json-ld').serialize(format="turtle")
