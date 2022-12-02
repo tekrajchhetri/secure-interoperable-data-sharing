@@ -53,7 +53,7 @@ class ConnectionManager(Helpers):
             "deployed_by": data["deployed_by"]
         }
         _r = requests.post(_URL, data=json.dumps(payload), headers={"Content-Type": "application/json"})
-        return _r.text
+        return json.loads(_r.text)["trustability"]
 
 
 if __name__ == '__main__':
