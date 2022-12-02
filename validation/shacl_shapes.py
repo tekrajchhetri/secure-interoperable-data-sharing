@@ -11,22 +11,18 @@ class SHACLShapes:
         """ SHACL shape graph for temperature sensor
 
         Example Data Graph:
-            @prefix : <http://www.tekrajchhetri.com/sricats/> .
-            @prefix sosa: <http://www.w3.org/ns/sosa/> .
-            @prefix sh: <http://www.w3.org/ns/shacl#> .
-            @prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
-            @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-            <observation/DS18B20_202205114824259234> a sosa:Observation ;
+            <http://www.w3.org/ns/sosa/Observation/DHT11_202212020001> a sosa:Observation ;
                 om:hasUnit om:degreeCelsius ;
-                sricats:hasHash "21449ca6d0e585d666dac4c24f51c1a0c047e2d45f229fddbaf115361d843c24"^^xsd:string ;
-                sosa:hasSimpleResult 8.1e+01 ;
-                sosa:madeBySensor <sensor/DS18B20> ;
-                sosa:observedProperty <STI_W201_temperature> ;
-                sosa:resultTime "2022-05-11T09:48:24"^^xsd:dateTime .
+                sricats:hasBlockChainHash "0x3cd7e0ed2cddb2302ec872c818c938f37cbba882eba23fe28ab54f6cd2d77e2c" ;
+                sricats:hasTrustabilityScore "0.8"^^xsd:float ;
+                sosa:hasSimpleResult 2.2e+01 ;
+                sosa:madeBySensor <http://www.w3.org/ns/sosa/Sensor/DHT11> ;
+                sosa:observedProperty <http://www.w3.org/ns/sosa/observedProperty/STI_W201_temperature> ;
+                sosa:resultTime "2022-12-02T21:00:01"^^xsd:dateTime .
 
-            <sensor/DS18B20> a sosa:Sensor ;
-                sosa:observes <observation/DS18B20_202205114824259234> .
+            <http://www.w3.org/ns/sosa/Sensor/DHT11> a sosa:Sensor ;
+                sosa:observes <http://www.w3.org/ns/sosa/Observation/DHT11_202212020001> .
+
 
         :return: string
         """
@@ -114,22 +110,18 @@ class SHACLShapes:
         """ SHACL shape graph for relative humidity sensor
 
         Example Data Graph:
-            @prefix : <http://www.tekrajchhetri.com/sricats/> .
-            @prefix sosa: <http://www.w3.org/ns/sosa/> .
-            @prefix sh: <http://www.w3.org/ns/shacl#> .
-            @prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
-            @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+            <http://www.w3.org/ns/sosa/Observation/DHT11_202212020001> a sosa:Observation ;
+                om:hasUnit om:percent ;
+                sricats:hasBlockChainHash "0x3cd7e0ed2cddb2302ec872c818c938f37cbba882eba23fe28ab54f6cd2d77e2c" ;
+                sricats:hasTrustabilityScore "0.8"^^xsd:float ;
+                sosa:hasSimpleResult 2.2e+01 ;
+                sosa:madeBySensor <http://www.w3.org/ns/sosa/Sensor/DHT11> ;
+                sosa:observedProperty <http://www.w3.org/ns/sosa/observedProperty/STI_W201_temperature> ;
+                sosa:resultTime "2022-12-02T21:00:01"^^xsd:dateTime .
 
-            <observation/DS18B20_2022051010211961971> a sosa:Observation ;
-                    :hasBlockChainHash "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42" ;
-                    om:hasUnit om:percent;
-                    sosa:resultTime "2005-02-28T00:00:00"^^xsd:dateTime;
-                    sosa:hasSimpleResult "45.3"^^xsd:double ;
-                    sosa:madeBySensor <sensor/DS18B20> ;
-                    sosa:observedProperty <STI_W201_humidity> .
+            <http://www.w3.org/ns/sosa/Sensor/DHT11> a sosa:Sensor ;
+                sosa:observes <http://www.w3.org/ns/sosa/Observation/DHT11_202212020001> .
 
-            <sensor/DS18B20> a sosa:Sensor ;
-                sosa:observes <observation/DS18B20_2022051010211961971> .
 
         :return: string
         """

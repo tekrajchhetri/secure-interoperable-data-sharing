@@ -21,19 +21,54 @@ class ValidationEngine(Helpers):
            2. Quality validation
         :param  data
         Example
-            {'observedproperty': 'STI_W201_humidity',
-            'observationsensorid': 'DS18B20',
-            'observationresult': 88.6,
-            'resultobservationtime': "2005-02-28T00:00:00",
-            'observationid': 'DS18B20_DS18B20_asfasdf',
-            'hasBlockChainHash': "c38f83392718b1024aff70b5fd0d79fdc04ee55fba7458554e6326f8b08bdf42"
-            }
+                {
+                  "@context": {
+                    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+                    "sosa": "http://www.w3.org/ns/sosa/",
+                    "sricats": "http://www.tekrajchhetri.com/sricats/",
+                    "xsd": "http://www.w3.org/2001/XMLSchema#"
+                  },
+                  "@graph": [
+                    {
+                      "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11",
+                      "@type": "sosa:Sensor",
+                      "sosa:observes": {
+                        "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202212025703"
+                      }
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/sosa/Observation/DHT11_202212025703",
+                      "@type": "sosa:Observation",
+                      "om:hasUnit": {
+                        "@id": "om:percent"
+                      },
+                      "sosa:hasSimpleResult": 28.0,
+                      "sosa:madeBySensor": {
+                        "@id": "http://www.w3.org/ns/sosa/Sensor/DHT11"
+                      },
+                      "sosa:observedProperty": {
+                        "@id": "http://www.w3.org/ns/sosa/observedProperty/STI_W201_humidity"
+                      },
+                      "sosa:resultTime": {
+                        "@type": "xsd:dateTime",
+                        "@value": "2022-12-02T20:57:03"
+                      },
+                      "sricats:hasBlockChainHash": "0xcbb35fbc905aa6aeceaeebec596bc76937d6a0cd1e04ff3aa970adc13899b076",
+                      "sricats:hasTrustabilityScore": {
+                        "@type": "xsd:float",
+                        "@value": "0.8"
+                      }
+                    }
+                  ]
+                }
+
         :return: boolean
         """
         data_graph_v = DataTransformationEngine().parse_kg_data_to_turtle(data)
         if self.validate_data_integrity(reconstructed_data_hash=self.reconstruct_hash_from_data(data_graph_v),
                                         blockchainHash=self.get_hash(data_graph_v)):
             print("##########################################################################################")
+            print(data_graph_v)
             print("######################  Integrity Verified, Proceeding to Next steps #####################")
             print("##########################################################################################")
             if "temperature" in self.get_type(data_graph_v).lower():
