@@ -16,10 +16,10 @@ class DataTransformationEngine:
         i.e., creates the data graph
         :inputs: JSON format
             Example Input:
-                {'observedproperty': 'STI_W201_temperature', 'observationsensorid': 'DHT11', 'observationresult': 22.0,
-                'resultobservationtime': '2022-11-24T09:54:19:782843', 'observationid': 'DHT11_202211245419782843',
+                {'observedproperty': 'STI_W201_humidity', 'observationsensorid': 'DHT11', 'observationresult': 28.0,
+                'resultobservationtime': '2022-12-02T20:57:03', 'observationid': 'DHT11_202212025703',
                 trustabilityscore:0.8,
-                'blockchainhashvalue': '0x510068715be38aa9e7ad5e600748644f858ae908f1be51adc5e24c81aa862bcc'}
+                'blockchainhashvalue': '0xcbb35fbc905aa6aeceaeebec596bc76937d6a0cd1e04ff3aa970adc13899b076'}
         :return: Trnasformed Knowledge Graph in JSONLD representation
             Example Output:
                   {

@@ -15,7 +15,7 @@ class SHACLShapes:
                 om:hasUnit om:degreeCelsius ;
                 sricats:hasBlockChainHash "0x3cd7e0ed2cddb2302ec872c818c938f37cbba882eba23fe28ab54f6cd2d77e2c" ;
                 sricats:hasTrustabilityScore "0.8"^^xsd:float ;
-                sosa:hasSimpleResult 2.2e+01 ;
+                sosa:hasSimpleResult 25 ;
                 sosa:madeBySensor <http://www.w3.org/ns/sosa/Sensor/DHT11> ;
                 sosa:observedProperty <http://www.w3.org/ns/sosa/observedProperty/STI_W201_temperature> ;
                 sosa:resultTime "2022-12-02T21:00:01"^^xsd:dateTime .
