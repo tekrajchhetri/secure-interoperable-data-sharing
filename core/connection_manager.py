@@ -6,9 +6,11 @@
 # @File    : connection_manager.py
 # @Software: PyCharm
 
+import json
 import pika
 from helper.helper import Helpers
 from SPARQLWrapper import SPARQLWrapper, BASIC
+import requests
 
 class ConnectionManager(Helpers):
     def rabbit_connection(self):
@@ -40,5 +42,23 @@ class ConnectionManager(Helpers):
         sparql.setHTTPAuth(BASIC)
         sparql.setCredentials(username, password)
         return sparql
+
+    def get_trustability_score(self):
+        data = self.get_trustability()
+        _URL = data["url"]
+
+        payload = {
+            "sensor_manufacturers": data["sensor_manufacturers"],
+            "deployed_location": data["deployed_location"],
+            "deployed_by": data["deployed_by"]
+        }
+        _r = requests.post(_URL, data=json.dumps(payload), headers={"Content-Type": "application/json"})
+        return _r.text
+
+
+if __name__ == '__main__':
+    c = ConnectionManager()
+    print(c.get_trustability_score())
+
 
 

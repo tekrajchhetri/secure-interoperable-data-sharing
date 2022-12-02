@@ -15,23 +15,25 @@ from legal.legal_engine import LegalEngine
 
 class Publish(ConnectionManager):
 
-    def generate_hash(self, noise_timestamp, value):
+    def generate_hash(self, noise_timestamp, value, trustabilityScore):
         return hashlib.sha256(bytes(
-            str(int(noise_timestamp) + float(value)
+            str(int(noise_timestamp) + float(value) + float(trustabilityScore)
                                      ), 'utf-8')).hexdigest()
 
     def format_data(self, sensorobservationvalue, type="temperature"):
         observed_property = f'STI_W201_{type}'
         timeStamp = datetime.now()
         sensorname = "DHT11"
+        trustabilityScore=self.get_trustability_score()
         formattedTimeStampObservation = timeStamp.strftime("%Y%m%d%M%S")
         formattedTimeStampDT = timeStamp.strftime("%Y-%m-%dT%H:%M:%S")
-        hashValue = self.generate_hash(formattedTimeStampObservation, sensorobservationvalue)
+        hashValue = self.generate_hash(formattedTimeStampObservation, sensorobservationvalue, trustabilityScore)
         blockchainHash = Transaction().create_transaction(hashValue)
         data = {'observedproperty': observed_property,
                 'observationsensorid': sensorname,
                 'observationresult': sensorobservationvalue,
                 'resultobservationtime': f"{formattedTimeStampDT}",
+                "trustabilityscore":trustabilityScore,
                 'observationid': f'{sensorname}_{formattedTimeStampObservation}',
                 'blockchainhashvalue':blockchainHash
                 }

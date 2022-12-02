@@ -53,6 +53,7 @@ class Helpers:
         return {"sensor_manufacturers":details["trustability"][0]["sensor_manufacturers"][0],
                 "deployed_location":details["trustability"][1]["deployed_location"][0],
                 "deployed_by": details["trustability"][2]["deployed_by"][0],
+                "url": details["trustability"][3]["url"][0],
                 }
 
 

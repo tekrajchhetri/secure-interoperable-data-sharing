@@ -80,6 +80,7 @@ class DataTransformationEngine:
         elif "humidity" in data['observedproperty']:
             g.add((obs, OM['hasUnit'], OM["percent"]))
         g.add((obs, SRICATS['hasBlockChainHash'], Literal(data['blockchainhashvalue'], datatype=XSD.string)))
+        g.add((obs, SRICATS['hasTrustabilityScore'], Literal(data['trustabilityscore'], datatype=XSD.float)))
         context = {"sricats": "http://www.tekrajchhetri.com/sricats/",
                    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
                    "sosa": "http://www.w3.org/ns/sosa/",

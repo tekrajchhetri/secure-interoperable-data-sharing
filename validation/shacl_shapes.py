@@ -82,7 +82,13 @@ class SHACLShapes:
                                     sh:maxCount 1; 
                                     sh:nodeKind  sh:IRI;
                             ];
-
+                            sh:property
+                            [
+                                sh:path :hasTrustabilityScore; 
+                                    sh:minCount 1;
+                                    sh:maxCount 1;  
+                                    sh:datatype  xsd:float;
+                            ];
                             sh:property
                             [
                                 sh:path sosa:observedProperty;
@@ -153,6 +159,13 @@ class SHACLShapes:
                                     sh:maxCount 1; 
                                     sh:minLength 60 ; 
                                     sh:datatype  xsd:string;
+                            ];
+                            sh:property
+                            [
+                                sh:path :hasTrustabilityScore; 
+                                    sh:minCount 1;
+                                    sh:maxCount 1;  
+                                    sh:datatype  xsd:float;
                             ];
                             
                             sh:property

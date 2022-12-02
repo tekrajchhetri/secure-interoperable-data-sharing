@@ -71,13 +71,13 @@ class ValidationEngine(Helpers):
         for row in qres:
             return  row.o
 
-    def get_blockchainHashInformation(self, data_graph):
+    def get_sricatsPropertyInformation(self, data_graph,propertyname):
         g = Graph().parse(data=data_graph)
         queryr = textwrap.dedent("""
                 SELECT  ?o WHERE {{
                 ?s a sosa:Observation;
-                   sricats:hasBlockChainHash ?o.
-            }}""")
+                   {0} ?o.
+            }}""").format(propertyname)
         qres = g.query(queryr)
         print(list(qres))
 
@@ -108,7 +108,8 @@ class ValidationEngine(Helpers):
             return  row.o if returnSorO == "o" else row.s
 
     def get_hash(self, data_graph):
-        blockchainHash = self.get_blockchainHashInformation(data_graph)
+        blockchainHash = self.get_sricatsPropertyInformation(data_graph,
+                                                             "sricats:hasBlockChainHash")
 
         if blockchainHash is None:
             return None
@@ -119,5 +120,9 @@ class ValidationEngine(Helpers):
         print(self.get_data_val(data_graph, "sosa:resultTime"))
         extractTimeStamp = datetime.strptime(str(self.get_data_val(data_graph, "sosa:resultTime")), '%Y-%m-%dT%H:%M:%S')
         return hashlib.sha256(
-            bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S")) + float(self.get_data_val(data_graph, "sosa:hasSimpleResult"))),
+            bytes(str(int(extractTimeStamp.strftime("%Y%m%d%M%S")) +
+                      float(self.get_data_val(data_graph, "sosa:hasSimpleResult"))+
+                      float(self.get_sricatsPropertyInformation(data_graph,
+                                                             "sricats:hasTrustabilityScore"))
+                      ),
                   'utf-8')).hexdigest()
