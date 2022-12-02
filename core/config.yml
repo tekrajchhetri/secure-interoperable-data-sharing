@@ -25,13 +25,23 @@ edgeintelligencemode:
   - mode:
       - edge
 
+trustability:
+  - sensor_manufacturers:
+      - Texas Instruments
+  - deployed_location:
+      - Yishun
+  - deployed_by:
+      - Texas Instruments
+  - url:
+      - URL
+
 
 graphdbdetails:
   - username:
-      - admin
+      - USR
   - password:
-      - Sm@shHitA_CT00L
+      - PWD
   - host:
-      - https://smashhitactool.sti2.at/repositories
+      - URL
   - repository:
-      - tek_edge_intelligence
+      - REPO
