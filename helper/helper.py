@@ -48,5 +48,16 @@ class Helpers:
                 "repository": details["graphdbdetails"][3]["repository"][0]
                 }
 
+    def get_trustability(self):
+        details = self.read_yml("core/config.yml")
+        return {"sensor_manufacturers":details["trustability"][0]["sensor_manufacturers"][0],
+                "deployed_location":details["trustability"][1]["deployed_location"][0],
+                "deployed_by": details["trustability"][2]["deployed_by"][0],
+                }
 
 
+
+if __name__ == '__main__':
+    "tests"
+    h = Helpers()
+    print(h.get_trustability())

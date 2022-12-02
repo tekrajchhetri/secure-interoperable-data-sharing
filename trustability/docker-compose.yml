@@ -1,0 +1,14 @@
+version: '3'
+services:
+  teksids:
+    image: tekrajchhetri/sids
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONBUFFERED=1
+    volumes:
+      - ./:/app
+    ports:
+      - "5070:5070"
