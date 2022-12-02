@@ -17,7 +17,7 @@ class Publish(ConnectionManager):
 
     def generate_hash(self, noise_timestamp, value, trustabilityScore):
         return hashlib.sha256(bytes(
-            str(int(noise_timestamp) + float(value) + float(trustabilityScore)
+            str(int(noise_timestamp) + float(value) + float(trustabilityScore["trustability"])
                                      ), 'utf-8')).hexdigest()
 
     def format_data(self, sensorobservationvalue, type="temperature"):
