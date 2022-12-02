@@ -19,7 +19,8 @@ Code in support for the publication.
 
 # KG Instance  
 
-![image](https://user-images.githubusercontent.com/52251022/203851228-0783954d-834a-456a-86ef-36bd770ffcd8.png)
+![image](https://user-images.githubusercontent.com/52251022/205376587-39024fe0-b5b9-44c8-b22f-3e383b273e6a.png)
+
 # Ganache Details (Test account)
 ## Accounts 
 - ganache_1  | (0) 0xe3Fc9C5d3055ceb429F0F161E863151D19d4B2bF (100 ETH)
