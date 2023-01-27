@@ -1,5 +1,7 @@
 # Enabling privacy-aware interoperable and quality IoT data sharing with context
 
+![image](https://user-images.githubusercontent.com/52251022/215083330-5dfe07ba-657c-4a3b-ab3c-79471e5cf771.png)
+
 Code in support for the publication.
 
 
@@ -62,8 +64,5 @@ Code in support for the publication.
 |Adafruit-DHT|1.4.0|
 |py_solc_x|1.1.1|
 |web3|5.31.1|
-
-# Authors
-![image](https://user-images.githubusercontent.com/52251022/215083330-5dfe07ba-657c-4a3b-ab3c-79471e5cf771.png)
 
 
