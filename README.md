@@ -18,6 +18,7 @@ Code in support for the publication.
 
 - Create a queue (go to queues tab) with a name *secure_interoperable_data_sharing*  (or based on what you've defined in config.yml)
 - Create exchange of type *topic*, routing key and assign (or bind) it to newly created queue. The name for both routing key and exchange is the same, which is *secure_interoperable_data_sharing*. IF you wish to change, you can do so in *config.yml*.
+- Run the code depending on how you want to run it, i.e., in edge or edge/fog mode, adjusting the settings in the config file.
 
 # KG Instance  
 
