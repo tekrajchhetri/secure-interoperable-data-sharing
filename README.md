@@ -64,9 +64,6 @@ Code in support for the publication.
 |web3|5.31.1|
 
 # Authors
-- Tek Raj Chhetri
-- Chinmaya Kumar Dehury 
--  Blesson Varghese 
--  Anna Fensel 
-- Satish Narayana Srirama 
-- Rance J. DeLong
+![image](https://user-images.githubusercontent.com/52251022/215083330-5dfe07ba-657c-4a3b-ab3c-79471e5cf771.png)
+
+
