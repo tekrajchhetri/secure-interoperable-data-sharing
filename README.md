@@ -62,4 +62,11 @@ Code in support for the publication.
 |Adafruit-DHT|1.4.0|
 |py_solc_x|1.1.1|
 |web3|5.31.1|
- 
+
+# Authors
+- Tek Raj Chhetri
+- Chinmaya Kumar Dehury 
+-  Blesson Varghese 
+-  Anna Fensel 
+- Satish Narayana Srirama 
+- Rance J. DeLong
