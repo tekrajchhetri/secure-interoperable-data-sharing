@@ -1,4 +1,4 @@
-# A Semantic-based pRivacy-aware and Intelligence enabling framework for Interoperable, aCcurate, and quAlity ioT data Sharing
+# Enabling privacy-aware interoperable and quality IoT data sharing with context
 
 Code in support for the publication.
 
