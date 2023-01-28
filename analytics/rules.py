@@ -14,14 +14,14 @@ class Rules:
                     hasSimpleResult(?observation, ?result),
                     hasedgeReasoningType(?observation, ?reasoningType), 
                     containsIgnoreCase(?reasoningType, "temperature"),
-                    greaterThanOrEqual(?result, 15.0),
+                    greaterThanOrEqual(?result, 75.0),
                     -> TemperatureAlert(?observation)""",
 
             "humidity": """Observation(?observation),  
                     hasedgeReasoningType(?observation, ?reasoningType), 
                     containsIgnoreCase(?reasoningType, "humidity"),
                     hasSimpleResult(?observation, ?result),
-                    greaterThanOrEqual(?result, 35.0),
+                    greaterThanOrEqual(?result, 65.0),
                     -> HumidityAlert(?observation)""",
 
         }
