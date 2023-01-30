@@ -1,4 +1,5 @@
 # Enabling privacy-aware interoperable and quality IoT data sharing with context
+<img width="1058" alt="image" src="https://user-images.githubusercontent.com/52251022/215470973-90dc4cce-3c3f-4924-8456-6c04422f7c88.png">
 
 Code in support for the publication.
 
