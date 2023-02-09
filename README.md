@@ -65,4 +65,6 @@ Code in support for the publication.
 |py_solc_x|1.1.1|
 |web3|5.31.1|
 
+# License
+- [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
