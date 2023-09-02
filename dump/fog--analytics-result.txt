@@ -1,0 +1,53 @@
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242123838868"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242124990006"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242125349991"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242126500540"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242126903500"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242128060715"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242128452100"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242132123896"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242132506045"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242133662140"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242134024492"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242137702404"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "None", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242138075110"}'
+##########################################################################################
+######################    Fog  Result  callback for future         #####################
+##########################################################################################
+b'{"alert": "TemperatureAlert", "observationsensorid": "http://www.w3.org/ns/sosa/Sensor/DHT11", "observedproperty": null, "observationid": "http://www.w3.org/ns/sosa/Observation/DHT11_202211242139229500"}'
