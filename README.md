@@ -1,7 +1,25 @@
 # Enabling privacy-aware interoperable and quality IoT data sharing with context
-<img width="1058" alt="image" src="https://user-images.githubusercontent.com/52251022/215470973-90dc4cce-3c3f-4924-8456-6c04422f7c88.png">
+![image](https://github.com/tekrajchhetri/secure-interoperable-data-sharing/assets/52251022/2cd71471-2841-4116-956c-e365f2e32557)
 
-Code in support for the publication.
+
+
+# Cite
+If you use any code, please cite our article.
+```
+@article{CHHETRI2024,
+title = {Enabling privacy-aware interoperable and quality IoT data sharing with context},
+journal = {Future Generation Computer Systems},
+year = {2024},
+issn = {0167-739X},
+doi = {https://doi.org/10.1016/j.future.2024.03.039},
+url = {https://www.sciencedirect.com/science/article/pii/S0167739X24001109},
+author = {Tek Raj Chhetri and Chinmaya Kumar Dehury and Blesson Varghese and Anna Fensel and Satish Narayana Srirama and Rance J. DeLong},
+keywords = {Data sharing, Edge intelligence, Interoperability, Internet of Things (IoT), Knowledge graphs, General Data Protection Regulation (GDPR), Smart cities},
+abstract = {Sharing Internet of Things (IoT) data across different sectors, such as in smart cities, becomes complex due to heterogeneity. This poses challenges related to a lack of interoperability, data quality issues and lack of context information, and a lack of data veracity (or accuracy). In addition, there are privacy concerns as IoT data may contain personally identifiable information. To address the above challenges, this paper presents a novel semantic technology-based framework that enables data sharing in a GDPR-compliant manner while ensuring that the data shared is interoperable, contains required context information, is of acceptable quality, and is accurate and trustworthy. The proposed framework also accounts for the edge/fog, an upcoming computing paradigm for the IoT to support real-time decisions. We evaluate the performance of the proposed framework with two different edge and fog-edge scenarios using resource-constrained IoT devices, such as the Raspberry Pi. In addition, we also evaluate shared data quality, interoperability and veracity. Our key finding is that the proposed framework can be employed on IoT devices with limited resources due to its low CPU and memory utilization for analytics operations and data transformation and migration operations. The low overhead of the framework supports real-time decision making. In addition, the 100% accuracy of our evaluation of the data quality and veracity based on 180 different observations demonstrates that the proposed framework can guarantee both data quality and veracity.}
+}
+  ```
+# DOI
+[https://doi.org/10.1016/j.future.2024.03.039](https://doi.org/10.1016/j.future.2024.03.039)
 
 
 # Instructions
